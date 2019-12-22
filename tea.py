@@ -15,7 +15,7 @@ BF_PrepareTime = 110
 Logout_WaitingTime = 5
 Login_WaitingTime = 10
 AFK_WaitingTime = 10
-Ave_WaitingTime = 800
+Ave_WaitingTime = 900
 
 global MountKey, NPCKey
 
@@ -94,7 +94,8 @@ def defence(k, t):
     while c < t :
         _anti_afk(k)
         battle_field(k)
-        r = random.randint(70, 90)
+        #r = random.randint(70, 90)
+        r = 50
         time.sleep(r)
         c = c + r   
         print 'Defence end in ' + str(t - c) + ' s...'
@@ -151,7 +152,7 @@ def _button(k, s):
     time.sleep(0.1)
     k.tap_key(k.enter_key)
 
-def _anti_afk(k, s):
+def _anti_afk(k):
     k.tap_key(k.enter_key)
     time.sleep(0.1)
     k.type_string('/g')
