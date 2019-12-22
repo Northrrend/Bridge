@@ -35,7 +35,7 @@ def battle_field(k):
     time.sleep(0.1)
     _button(k, 'BattlefieldFrameJoinButton')
     time.sleep(0.1)
-    print 'Wait ' + BF_WaitingTime + ' to enter Battlefield'
+    print 'Wait ' + str(BF_WaitingTime) + ' to enter Battlefield'
     time.sleep(BF_WaitingTime)
     _button(k, 'StaticPopup1Button1')
 
@@ -84,7 +84,24 @@ def defence(k, t):
     c = 0
     while c < t :
         k.tap_key(k.space_key)
-        r = random.randint(10, 15)
+        r = random.randint(15, 20)
+        time.sleep(r)
+        c = c + r   
+        print 'Defence end in ' + str(t - c) + ' s...'
+
+def defence2(k, t):
+    c = 0
+    while c < t :
+        k.tap_key(k.enter_key)
+        time.sleep(0.1)
+        k.type_string('/g')
+        time.sleep(0.1)
+        k.tap_key(k.space_key)
+        time.sleep(0.1)
+        k.type_string('youshallnotbepassed!')
+        time.sleep(0.1)
+        k.tap_key(k.enter_key) 
+        r = random.randint(70, 90)
         time.sleep(r)
         c = c + r   
         print 'Defence end in ' + str(t - c) + ' s...'
@@ -143,17 +160,17 @@ def _button(k, s):
 
 if __name__=='__main__':
     print 'Parent process %s.' % os.getpid()
-    i = 0
+    i = 1
     k = PyKeyboard()
     time.sleep(2)
     while True:
         battle_field(k)
-        print 'Wait ' + BF_PrepareTime + ' for battle to start'
+        print 'Wait ' + str(BF_PrepareTime) + ' for battle to start'
         defence(k, BF_PrepareTime)
         to_bridge(k, i)
-        defence(k, Ave_WaitingTime)
+        defence2(k, Ave_WaitingTime)
         battle_field(k)
-        defence(k, Ave_WaitingTime)
+        defence2(k, Ave_WaitingTime)
         afk(k)
         i = change_role(k, i)
         print i
