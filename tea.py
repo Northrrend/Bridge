@@ -15,7 +15,7 @@ BF_PrepareTime = 110
 Logout_WaitingTime = 5
 Login_WaitingTime = 10
 AFK_WaitingTime = 10
-Ave_WaitingTime = 450
+Ave_WaitingTime = 800
 
 global MountKey, NPCKey
 
@@ -80,7 +80,7 @@ def mount2(k):
     k.tap_key(MountKey2)
     time.sleep(3)
 
-def defence(k, t):
+def jump(k, t):
     c = 0
     while c < t :
         k.tap_key(k.space_key)
@@ -89,18 +89,11 @@ def defence(k, t):
         c = c + r   
         print 'Defence end in ' + str(t - c) + ' s...'
 
-def defence2(k, t):
+def defence(k, t):
     c = 0
     while c < t :
-        k.tap_key(k.enter_key)
-        time.sleep(0.1)
-        k.type_string('/g')
-        time.sleep(0.1)
-        k.tap_key(k.space_key)
-        time.sleep(0.1)
-        k.type_string('youshallnotbepassed!')
-        time.sleep(0.1)
-        k.tap_key(k.enter_key) 
+        _anti_afk(k)
+        battle_field(k)
         r = random.randint(70, 90)
         time.sleep(r)
         c = c + r   
@@ -158,6 +151,17 @@ def _button(k, s):
     time.sleep(0.1)
     k.tap_key(k.enter_key)
 
+def _anti_afk(k, s):
+    k.tap_key(k.enter_key)
+    time.sleep(0.1)
+    k.type_string('/g')
+    time.sleep(0.1)
+    k.tap_key(k.space_key)
+    time.sleep(0.1)
+    k.type_string('ironarmorisstillthere')
+    time.sleep(0.1)
+    k.tap_key(k.enter_key)
+
 if __name__=='__main__':
     print 'Parent process %s.' % os.getpid()
     i = 1
@@ -166,11 +170,9 @@ if __name__=='__main__':
     while True:
         battle_field(k)
         print 'Wait ' + str(BF_PrepareTime) + ' for battle to start'
-        defence(k, BF_PrepareTime)
+        jump(k, BF_PrepareTime)
         to_bridge(k, i)
-        defence2(k, Ave_WaitingTime)
-        battle_field(k)
-        defence2(k, Ave_WaitingTime)
+        defence(k, Ave_WaitingTime)
         afk(k)
         i = change_role(k, i)
         print i
