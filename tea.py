@@ -97,7 +97,7 @@ def defence(k, t):
         #r = random.randint(70, 90)
         r = 50
         time.sleep(r)
-        c = c + r   
+        c = c + r + 10
         print 'Defence end in ' + str(t - c) + ' s...'
 
 def to_bridge(k, i):
@@ -111,7 +111,7 @@ def to_bridge(k, i):
         mount(k)
         turn_right(k, 0.1)
         march(k, 4)
-        turn_right(k, 0.3)
+        turn_right(k, 0.28)
         march(k, 18)
         turn_right(k, 0.8)
         march(k, 10)
