@@ -159,13 +159,13 @@ def _anti_afk(k):
     time.sleep(0.1)
     k.tap_key(k.space_key)
     time.sleep(0.1)
-    k.type_string('ironarmorisstillthere')
+    k.type_string('usb')
     time.sleep(0.1)
     k.tap_key(k.enter_key)
 
 if __name__=='__main__':
     print 'Parent process %s.' % os.getpid()
-    i = 1
+    i = 0
     k = PyKeyboard()
     time.sleep(2)
     while True:
