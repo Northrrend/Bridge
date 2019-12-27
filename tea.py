@@ -92,7 +92,7 @@ def jump(k, t):
 def defence(k, t):
     c = 0
     while c < t :
-        _anti_afk(k)
+        _anti_afk2(k)
         battle_field(k)
         #r = random.randint(70, 90)
         r = 50
@@ -163,9 +163,12 @@ def _anti_afk(k):
     time.sleep(0.1)
     k.tap_key(k.enter_key)
 
+def _anti_afk2(k):
+    k.tap_key('6')
+
 if __name__=='__main__':
     print 'Parent process %s.' % os.getpid()
-    i = 0
+    i = 1
     k = PyKeyboard()
     time.sleep(2)
     while True:
