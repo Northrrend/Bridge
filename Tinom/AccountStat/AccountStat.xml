@@ -1,0 +1,15 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\..\..\BlizzardInterfaceCode\Interface\FrameXML\UI.xsd">
+	<Script file="AccountStat.lua" />
+	<Frame name="TinomAccountStat">
+		<Scripts>
+			<OnLoad>
+				Tdebug(self,"log","AccountStat.xml.OnLoad");
+				self:RegisterEvent("PLAYER_LEAVING_WORLD");
+			</OnLoad>
+			<OnEvent>
+				Tdebug(self,"log","AccountStat.xml.OnEvent\"PLAYER_LEAVING_WORLD\"");
+				Tinom.LoginLog(self,event,...);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

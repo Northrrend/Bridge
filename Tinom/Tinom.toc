@@ -1,0 +1,26 @@
+## Interface: 80205
+## Title: Tinom 聊天增强
+## Notes: 这个插件用于优化聊天体验,包括过滤,统计,游戏等功能.
+## Author: Tinom
+## Version: 0.1-beta.16
+## SavedVariables: TinomDB, debugDB
+
+# 角色变量,存储于角色下.","分隔多个变量
+# SavedVariablesPerCharacter: chardb
+
+# 账号变量,存储于账号下.","分隔多个变量
+# SavedVariables: globaldb, characterDB, filterDB
+
+
+# 一个井号的属于注释行.
+# 索引需要载入的文件,将按照顺序加载.
+
+debug.lua
+Locale\Locale.xml
+Tinom.xml
+Core.lua
+ChatStat\ChatStat.xml
+Filter\Filter.xml
+Options\Options.xml
+AccountStat\AccountStat.xml
+#test\test.xml

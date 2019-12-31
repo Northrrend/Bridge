@@ -1,0 +1,214 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+F:\World of Warcraft\_retail_\BlizzardInterfaceCode\Interface\FrameXML\UI.xsd">
+
+<Script file="ChatStat.lua" />
+
+<Frame name="TinomChatStatFrame" parent="UIParent" toplevel="true" hidden="true" movable="true" enableMouse="true">
+  <Size x="260" y="400"/>
+  <Anchors>
+      <Anchor point="CENTER"/>
+  </Anchors>
+  <Layers>
+    <Layer level="ARTWORK">
+      <Texture name="TinomChatStatFrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
+        <Size x="256" y="64"/>
+        <Anchors>
+          <Anchor point="CENTER" relativeTo="$parent" relativePoint="TOP">
+            <Offset x="0" y="-10"/>
+          </Anchor>
+        </Anchors>
+      </Texture>
+      <FontString name="$parentTitle" text="ChatStat" inherits="OptionsFontHighlight" justifyH="CENTER" justifyV="TOP">
+        <Anchors>
+          <Anchor point="CENTER" relativeTo="TinomChatStatFrameHeader">
+            <Offset>
+              <AbsDimension x="0" y="10"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentMsgNum" text="000" font="Fonts\ARKai_T.TTF" justifyH="CENTER" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOP" relativeTo="$parent">
+            <Offset>
+              <AbsDimension x="0" y="-20"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <FontHeight>
+          <AbsValue val="60"/>
+        </FontHeight>
+        <Shadow x="2" y="-2"/>
+          <!-- <Offset x="14" y="-14" />
+          <Color r="0" g="0" b="0" a="1"/>
+        </Shadow> -->
+        <Color r="1" g="1" b="0"/>
+      </FontString>
+      <Texture name="$parentUnderline">
+        <Anchors>
+          <Anchor point="TOP" relativeTo="$parentMsgNum" relativePoint="BOTTOM" x="0" y="-4"/>
+          <Anchor point="LEFT" relativeTo="$parent"  x="6"/>
+          <Anchor point="RIGHT" relativeTo="$parent" x="-6"/>parentMsgNum
+        </Anchors>
+        <Color r="1" g="1" b="0"/>
+      </Texture>
+      <FontString name="$parentText1" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentUnderline" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText2" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText1" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText3" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText2" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText4" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText3" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText5" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText4" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText6" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText5" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText7" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText6" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText8" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText7" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText9" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText8" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText10" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText9" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText11" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText10" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText12" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText11" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText13" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText12" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+      <FontString name="$parentText14" parentArray="Texts" inherits="OptionsFontHighlight" justifyH="LEFT" justifyV="TOP">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentText13" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+        </Anchors>
+      </FontString>
+
+
+    </Layer>
+  </Layers>
+  <Backdrop bgFile="Interface\dialogframe\ui-dialogbox-gold-background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+    <EdgeSize>
+      <AbsValue val="16"/>
+    </EdgeSize>
+    <TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+    <BorderColor r="1" g="1" b="1" a="1"/>
+    <Color r="0.2" g="0.2" b="0.2" a="0.8"/>
+
+    <BackgroundInsets>
+      <AbsInset left="5" right="5" top="5" bottom="5"/>
+    </BackgroundInsets>
+  </Backdrop>
+  <Frames>
+    <!-- 按钮模块 -->
+    <Button name="$parentExit" inherits="UIPanelButtonTemplate" text="关闭">
+      <Size>
+        <AbsDimension x="128" y="26"/>
+      </Size>
+      <Anchors>
+        <Anchor point="CENTER" relativeTo="$parent" relativePoint="BOTTOM">
+          <Offset>
+            <AbsDimension x="0" y="20"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+      <Scripts>
+        <OnShow>
+          self:Enable();
+          <!-- self:Disable(); -->
+        </OnShow>
+        <OnClick>
+          PlaySound(SOUNDKIT.GS_TITLE_OPTION_OK);
+          TinomChatStatFrame:Hide();
+        </OnClick>
+      </Scripts>
+      <NormalFont style="GameFontNormalSmall"/>
+      <HighlightFont style="GameFontHighlightSmall"/>
+    </Button>
+  </Frames>
+  <Scripts>
+   <OnLoad>
+    Tdebug(self,"log","ChatStat.xml加载");
+    self:RegisterForDrag("LeftButton");
+   </OnLoad>
+   <OnDragStart>
+      if not self.isLocked then
+        self:StartMoving();
+      end
+   </OnDragStart>
+   <OnDragStop>
+    self:StopMovingOrSizing();
+   </OnDragStop>
+   <OnEvent>
+    
+   </OnEvent>
+  </Scripts>
+</Frame>
+
+<MessageFrame name="TinomMessageFrame" hidden="true" displayDuration="10" fadeDuration="0.5" fadePower="3" insertMode="TOP" parent="UIParent" frameStrata="DIALOG" frameLevel="1" toplevel="true" mixin="UIErrorsMixin">
+		<Size x="300" y="200" />
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+    <Backdrop bgFile="Interface\dialogframe\ui-dialogbox-gold-background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+    <EdgeSize>
+      <AbsValue val="16"/>
+    </EdgeSize>
+    <TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+    <BorderColor r="1" g="1" b="1" a="1"/>
+    <Color r="0.2" g="0.2" b="0.2" a="0.8"/>
+
+    <BackgroundInsets>
+      <AbsInset left="5" right="5" top="5" bottom="5"/>
+    </BackgroundInsets>
+  </Backdrop>
+		<Scripts>
+			<OnLoad method="OnLoad"/>
+			<OnEvent method="OnEvent"/>
+		</Scripts>
+		<FontString inherits="OptionsFontHighlight" justifyH="CENTER"/>
+	</MessageFrame>
+</Ui>
