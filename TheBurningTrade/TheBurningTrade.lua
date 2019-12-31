@@ -125,9 +125,127 @@ function TBTFrame_SetButtonSpell(button, spell)
 	end
 end
 
-function TBT_TradeItem(self, type)
+function XJQ_Water()
+	local item="魔法晶水";
+	local quantity=20;
+	local type="water";
+	local bag, slot = TBT_FindItem(item, quantity, type);
+	if(slot) then
+		local emptySlot = false;
+		for i=1,6 do
+			if(not GetTradePlayerItemInfo(i)) then
+					emptySlot = true;
+			end;
+		end
+		if(emptySlot) then
+			PickupContainerItem(bag, slot);
+			StackSplitFrame:Hide();
+			TradeFrame_OnMouseUp();
+			return;
+		end;
+	end
+end
+
+function XJQ_Food()
+	local item="魔法甜面包";
+	local quantity=20;
+	local type="water";
+	local bag, slot = TBT_FindItem(item, quantity, type);
+	if(slot) then
+		local emptySlot = false;
+		for i=1,6 do
+			if(not GetTradePlayerItemInfo(i)) then
+					emptySlot = true;
+			end;
+		end
+		if(emptySlot) then
+			PickupContainerItem(bag, slot);
+			StackSplitFrame:Hide();
+			TradeFrame_OnMouseUp();
+			return;
+		end;
+	end
+end
+
+function TBT_TradeItem(self, type, npc_class)
 	local item, quantity,spell,maxRank,spells,i;
+	if(type == "stone") then
+		item="特效治疗石";
+		quantity=1;
+		local bag, slot = TBT_FindItem(item, quantity, type);
+		if(slot) then
+			local emptySlot = false;
+			for i=1,6 do
+				if(not GetTradePlayerItemInfo(i)) then
+						emptySlot = true;
+				end;
+			end
+			if(emptySlot) then
+				PickupContainerItem(bag, slot);
+				StackSplitFrame:Hide();
+				TradeFrame_OnMouseUp();
+				return;
+			end;
+		end
+	elseif(type == "water") then
+		item="魔法晶水";
+		quantity=20;
+		local bag, slot = TBT_FindItem(item, quantity, type);
+		if(slot) then
+			local emptySlot = false;
+			for i=1,6 do
+				if(not GetTradePlayerItemInfo(i)) then
+						emptySlot = true;
+				end;
+			end
+			if(emptySlot) then
+				PickupContainerItem(bag, slot);
+				StackSplitFrame:Hide();
+				TradeFrame_OnMouseUp();
+				return;
+			end;
+		end
+	elseif(type == "food") then
+		local food_count=0;
+		local water_count=0;
+		if(npc_class=="战士" or npc_class=="潜行者") then
+			food_count=6;
+			water_count=0;
+			XJQ_Food();
+			XJQ_Food();
+			XJQ_Food();
+			XJQ_Food();
+			XJQ_Food();
+			XJQ_Food();
+		end;
+		if(npc_class=="猎人" or npc_class=="术士") then
+			food_count=2;
+			water_count=4;
+			XJQ_Food();
+			XJQ_Food();
+			XJQ_Water();
+			XJQ_Water();
+			XJQ_Water();
+			XJQ_Water();
+			XJQ_Food();
+			XJQ_Food();
+		end;
+		if(npc_class=="法师" or npc_class=="牧师" or npc_class=="德鲁伊" or npc_class=="圣骑士") then
+			food_count=0;
+			water_count=6;
+			XJQ_Water();
+			XJQ_Water();
+			XJQ_Water();
+			XJQ_Water();
+			XJQ_Water();
+			XJQ_Water();
+		end;
+	end
 	maxRank = TBT_MaxSpellRank[type];
+	--DEFAULT_CHAT_FRAME:AddMessage("type:"..type);
+	--DEFAULT_CHAT_FRAME:AddMessage("item:"..item);
+	DEFAULT_CHAT_FRAME:AddMessage("npc_class:"..npc_class);
+	--[[
 	if(maxRank) then
 		TBTFrame_SetButtonSpell(self, "");
 		local spells, npcLevel;
@@ -165,6 +283,8 @@ function TBT_TradeItem(self, type)
 		end
 		TBTFrame_SetButtonSpell(self, spell);
 	end
+	]]
+	--DEFAULT_CHAT_FRAME:AddMessage("begin to search bag");
 end
 
 function GetCurrentMageSpell()
@@ -261,7 +381,7 @@ function TogglePortalPanel(tog)
 
 end
 
-function TBTFrame_CreateLeftButton(class)
+function TBTFrame_CreateLeftButton(class, npc_class)
 	if(getglobal("TradeFramePlayerSpell1Button")~=nil)then return end; --already created
 
 	local button = nil;
@@ -272,7 +392,7 @@ function TBTFrame_CreateLeftButton(class)
 		button:SetHeight(26);
 		button:SetNormalTexture("Interface\\Icons\\inv_drink_18");
 		button:SetPoint("TOPLEFT", "TradeFrame", "TOPLEFT", 60, -30);
-		button:SetScript("PreClick", function(self) TBT_TradeItem(self, "water") end);
+		button:SetScript("PreClick", function(self) TBT_TradeItem(self, "water", UnitClass("NPC")) end);
 		button:SetScript("PostClick", function(self) TBTFrame_SetButtonSpell(self,"") end);
 
 		button = CreateFrame("Button", "TradeFramePlayerSpell2Button", TradeFrame, "TBTButtonTemplate");
@@ -280,7 +400,7 @@ function TBTFrame_CreateLeftButton(class)
 		button:SetHeight(26);
 		button:SetNormalTexture("Interface\\Icons\\inv_misc_food_33");
 		button:SetPoint("LEFT", "TradeFramePlayerSpell1Button", "RIGHT", 5, 0);
-		button:SetScript("PreClick", function(self) TBT_TradeItem(self, "food") end);
+		button:SetScript("PreClick", function(self) TBT_TradeItem(self, "food", UnitClass("NPC")) end);
 		button:SetScript("PostClick", function(self) TBTFrame_SetButtonSpell(self,"") end);
 
 		local spell,texture = GetCurrentMageSpell()
@@ -339,8 +459,9 @@ function TBTFrame_CreateLeftButton(class)
 		button:SetHeight(26);
 		button:SetNormalTexture("Interface\\Icons\\inv_stone_04");
 		button:SetPoint("TOPLEFT", "TradeFrame", "TOPLEFT", 70, -30);
-		button:SetScript("PreClick", function(self) TBT_TradeItem(self, "stone") end);
-		button:SetScript("PostClick", function(self) TBTFrame_SetButtonSpell(self,"") end);
+		button:SetScript("OnClick", function(self) TBT_TradeItem(self, "stone", UnitClass("NPC")) end);
+		--button:SetScript("PreClick", function(self) TBT_TradeItem(self, "stone") end);
+		--button:SetScript("PostClick", function(self) TBTFrame_SetButtonSpell(self,"") end);
 	elseif (class=="ROGUE") then
 		button = CreateFrame("Button", "TradeFramePlayerSpell1Button", TradeFrame, "TBTButtonTemplate");
 		button:SetWidth(30);
@@ -357,7 +478,6 @@ TBT_MaxSpellRank = nil;
 
 function TBTFrame_OnPlayerEnter()
 	local _,class = UnitClass("player")
-
 
 	if(TBT_MaxSpellRank==nil) then
 		TBT_MaxSpellRank = {};
@@ -428,12 +548,20 @@ end
 
 function TBT_FindItem(item,quantity,type)
 	local bag,slog,i;
+	--DEFAULT_CHAT_FRAME:AddMessage("enter searching function");
+	--DEFAULT_CHAT_FRAME:AddMessage("item："..item);
+	--DEFAULT_CHAT_FRAME:AddMessage("quantity："..quantity);
+	--DEFAULT_CHAT_FRAME:AddMessage("type："..type);
+	--DEFAULT_CHAT_FRAME:AddMessage("NUM_CONTAINER_FRAMES: "..NUM_CONTAINER_FRAMES);
 	for bag=0,NUM_CONTAINER_FRAMES do
+		--DEFAULT_CHAT_FRAME:AddMessage("ContainerNumSlots: "..GetContainerNumSlots(bag));
 		for slot=1,GetContainerNumSlots(bag) do
+			--DEFAULT_CHAT_FRAME:AddMessage("slot: "..slot);
 			local _, count, locked, _ = GetContainerItemInfo(bag, slot)
 			if (count and not locked and count >= quantity ) then
 				local itemLink = GetContainerItemLink(bag, slot);
 				local found, _, name = string.find(itemLink, "^|%x+|H.+|h%[(.+)%]")
+				--DEFAULT_CHAT_FRAME:AddMessage("name:"..name);
 				if item == name then
 					TBT_debug("item==name",name);
 					--to distinguish the healthstone made by other warlock
