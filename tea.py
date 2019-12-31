@@ -168,7 +168,7 @@ def _anti_afk2(k):
 
 if __name__=='__main__':
     print 'Parent process %s.' % os.getpid()
-    i = 1
+    i = 0
     k = PyKeyboard()
     time.sleep(2)
     while True:
