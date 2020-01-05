@@ -325,7 +325,6 @@ RegEvent("ADDON_LOADED", function()
                 else
                     local text = GREEN_FONT_COLOR:WrapTextInColorCode(L["New"])
                     self.text:SetText(string.gsub(tx ,toJ , YELLOW_FONT_COLOR:WrapTextInColorCode(toJ) .. "(" .. text .. ")"))
-
                 end
                 break
             end

@@ -10,9 +10,7 @@ import argparse
 import cv2
 import os
 
-#pip install opencv-python
-#pip install pillow
-#pip install pytesseract
+
 
 def window_capture(filename):
     hwnd = 0
