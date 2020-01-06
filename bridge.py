@@ -39,6 +39,24 @@ def battle_field(k):
     time.sleep(BF_WaitingTime)
     _button(k, 'StaticPopup1Button1')
 
+def join_bf(k):
+    k.tap_key(TargetKey)
+    time.sleep(0.1)
+    k.tap_key(NPCKey)
+    time.sleep(0.1)
+    _button(k, 'GossipTitleButton1')
+    time.sleep(0.1)
+    _button(k, 'BattlefieldFrameJoinButton')
+
+def enter_bf(k):
+    _button(k, 'StaticPopup1Button1')
+
+def cancel_bf(k):
+    _button(k, 'WorldStateScoreFrameLeaveButton')
+
+def quit_bf(k):
+    _button(k, 'WorldStateScoreFrameLeaveButton')
+
 def change_role(k, i):
     print 'Change to another role'
     if i == 0:
@@ -99,6 +117,7 @@ def defence(k, t):
         time.sleep(r)
         c = c + r + 10
         print 'Defence end in ' + str(t - c) + ' s...'
+
 
 def to_bridge(k, i):
     print 'March to bridge'
@@ -168,7 +187,7 @@ def _anti_afk2(k):
 
 if __name__=='__main__':
     print 'Parent process %s.' % os.getpid()
-    i = 0
+    i = 0  #initial role
     k = PyKeyboard()
     time.sleep(2)
     while True:
