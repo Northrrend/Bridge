@@ -21,14 +21,15 @@ def window_capture(filename):
     MoniterDev = win32api.EnumDisplayMonitors(None, None)
     w = MoniterDev[0][2][2]
     h = MoniterDev[0][2][3]
-    w = w/5
-    h = h/20
+    #w = w/4
+    #h = h/20
     print w,h
     saveBitMap.CreateCompatibleBitmap(mfcDC, w, h)
     saveDC.SelectObject(saveBitMap)
     saveDC.BitBlt((0, 0), (w, h), mfcDC, (0, 0), win32con.SRCCOPY)
     saveBitMap.SaveBitmapFile(saveDC, filename)
 
+time.sleep(2)
 beg = time.time()
 window_capture("haha.jpg")
 end = time.time()

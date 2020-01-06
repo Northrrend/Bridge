@@ -304,7 +304,7 @@ RegEvent("ADDON_LOADED", function()
             toJ = tonumber(toJ)
             if toJ then
                 if instanceIDs[toJ] then
-
+                    -- DEFAULT_CHAT_FRAME:AddMessage("type:");
                     -- first half 0 - rate -> red (0)
                     -- second half rate - 100% -> red(0) -> yellow (1)
                     local rate = 0.45
@@ -323,6 +323,7 @@ RegEvent("ADDON_LOADED", function()
 
                     self.text:SetText(string.gsub(tx ,toJ , YELLOW_FONT_COLOR:WrapTextInColorCode(toJ) .. "(" .. text .. ")"))
                 else
+                    -- ADDONSELF.Print(L["test"])
                     local text = GREEN_FONT_COLOR:WrapTextInColorCode(L["New"])
                     self.text:SetText(string.gsub(tx ,toJ , YELLOW_FONT_COLOR:WrapTextInColorCode(toJ) .. "(" .. text .. ")"))
                 end
