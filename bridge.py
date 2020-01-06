@@ -6,11 +6,12 @@ import pymouse,pykeyboard,os,sys
 from pymouse import *
 from pykeyboard import PyKeyboard
 import random
+from capture import *
 
 global BF_WaitingTime, Logout_WaitingTime, Logout_WaitingTime, AFK_WaitingTime, BF_PrepareTime, Ave_WaitingTime
 
 # BF_WaitingTime + BF_PrepareTime = 120
-BF_WaitingTime = 10
+BF_WaitingTime = 5
 BF_PrepareTime = 110
 Logout_WaitingTime = 5
 Login_WaitingTime = 10
@@ -52,7 +53,7 @@ def enter_bf(k):
     _button(k, 'StaticPopup1Button1')
 
 def cancel_bf(k):
-    _button(k, 'WorldStateScoreFrameLeaveButton')
+    _button(k, 'DropDownList1Button3')
 
 def quit_bf(k):
     _button(k, 'WorldStateScoreFrameLeaveButton')
@@ -190,12 +191,19 @@ if __name__=='__main__':
     i = 0  #initial role
     k = PyKeyboard()
     time.sleep(2)
-    while True:
-        battle_field(k)
-        print 'Wait ' + str(BF_PrepareTime) + ' for battle to start'
+    #while True:
+    #    join_bf
+    #    print 'Wait ' + str(BF_PrepareTime) + ' for battle to start'
+    #    jump(k, BF_PrepareTime)
+    #    to_bridge(k, i)
+    #    defence(k, Ave_WaitingTime)
+    #    afk(k)
+    #    i = change_role(k, i)
+    #    print i
+    join_bf(k)
+    time.sleep(BF_WaitingTime)
+    if newbattle():
+        enter_bf(k)
         jump(k, BF_PrepareTime)
-        to_bridge(k, i)
-        defence(k, Ave_WaitingTime)
-        afk(k)
-        i = change_role(k, i)
-        print i
+    else:
+        cancel_bf(k)

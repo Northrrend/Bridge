@@ -304,7 +304,14 @@ RegEvent("ADDON_LOADED", function()
             toJ = tonumber(toJ)
             if toJ then
                 if instanceIDs[toJ] then
-                    -- DEFAULT_CHAT_FRAME:AddMessage("type:");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("bt   old");
                     -- first half 0 - rate -> red (0)
                     -- second half rate - 100% -> red(0) -> yellow (1)
                     local rate = 0.45
@@ -315,7 +322,26 @@ RegEvent("ADDON_LOADED", function()
 
                     local color = CreateColor(1.0, math.min(pos0 / (total * (1 - rate)), 1) , 0)
                     local text = color:WrapTextInColorCode(L["List Position"] .. " " .. string.format("%d/%d", pos, total))
-
+                    local i = total - pos
+                    if i > 4 then
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("bt   old");
+                    else
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("test");
+                        DEFAULT_CHAT_FRAME:AddMessage("bt   mmo");
+                    end
                     local elp = GetElapseFromCache(mapName, toJ)
                     if elp then
                         text = RED_FONT_COLOR:WrapTextInColorCode(SecondsToTime(elp))
@@ -323,7 +349,14 @@ RegEvent("ADDON_LOADED", function()
 
                     self.text:SetText(string.gsub(tx ,toJ , YELLOW_FONT_COLOR:WrapTextInColorCode(toJ) .. "(" .. text .. ")"))
                 else
-                    -- ADDONSELF.Print(L["test"])
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("test");
+                    DEFAULT_CHAT_FRAME:AddMessage("bt   dmd");
                     local text = GREEN_FONT_COLOR:WrapTextInColorCode(L["New"])
                     self.text:SetText(string.gsub(tx ,toJ , YELLOW_FONT_COLOR:WrapTextInColorCode(toJ) .. "(" .. text .. ")"))
                 end

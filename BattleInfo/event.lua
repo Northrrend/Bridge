@@ -5,11 +5,14 @@ local m = {}
 f:SetScript("OnEvent", function(self, event, ...)
     if event == "ADDON_LOADED" then
         local name = select(1, ...)
+        -- DEFAULT_CHAT_FRAME:AddMessage("test");
 
         if ADDONNAME ~= name then
             return
         end
     end
+
+    
 
     local cbs = m[event]
     if cbs then
