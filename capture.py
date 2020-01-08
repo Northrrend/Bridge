@@ -64,7 +64,6 @@ def _snap_handle(filename, filename2):
 def newbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
     _window_capture("full.jpg")
-    #_snap_handle("full.jpg", "minimal.jpg")
     text = pytesseract.image_to_string(Image.open("full.jpg"))
     print text
     try:
@@ -78,10 +77,8 @@ def newbattle():
 def endbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
     _window_capture("full.jpg")
-    #_snap_handle("full.jpg", "minimal.jpg")
     text = pytesseract.image_to_string(Image.open("full.jpg"))
     print text
-    #t = str(text).splitlines()
     try:
         if text.find("mpo") >= 0:
             return True

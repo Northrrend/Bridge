@@ -10,7 +10,6 @@ from capture import *
 from role import Role
 import window
 
-global BF_WaitingTime, Logout_WaitingTime, Logout_WaitingTime, AFK_WaitingTime, BF_PrepareTime, Ave_WaitingTime
 
 BF_WaitingTime = 5
 BF_PrepareTime = 110
@@ -21,35 +20,8 @@ BF_WinningTime = 60*40
 Reload_WaitingTime = 5
 Escape_WaitingTime = 60*15
 
-global MountKey, NPCKey
-
-TargetKey = 'g'
-NPCKey = '.'
 MountKey1 = 'g'
 MountKey2 = 'q'
-
-
-def join_bf(k):
-    k.tap_key(TargetKey)
-    time.sleep(0.1)
-    k.tap_key(NPCKey)
-    time.sleep(0.1)
-    _button(k, 'GossipTitleButton1')
-    time.sleep(0.1)
-    _button(k, 'BattlefieldFrameJoinButton')
-
-def enter_bf(k):
-    _button(k, 'StaticPopup1Button1')
-
-def cancel_bf(k):
-    _button(k, 'DropDownList1Button3')
-
-def cancel_bf2(k):
-    _button_right(k, 'MiniMapBattlefieldFrame')
-    _button(k, 'DropDownList1Button3')
-
-def quit_bf(k):
-    _button(k, 'WorldStateScoreFrameLeaveButton')
 
 def change_role(k, i):
     print 'Change to another role'
@@ -103,42 +75,6 @@ def to_bridge(k):
     march(k, 10)
     mount(k)
 
-def afk(k):
-    print 'Timeout get out of battlefield'
-    k.tap_key(k.enter_key)
-    time.sleep(0.1)
-    k.type_string('/afk')
-    time.sleep(0.1)
-    k.tap_key(k.enter_key)
-    time.sleep(AFK_WaitingTime)
-
-def _button(k, s):
-    k.tap_key(k.enter_key)
-    time.sleep(0.1)
-    k.type_string('/click')
-    time.sleep(0.1)
-    k.tap_key(k.space_key)
-    time.sleep(0.1)
-    k.type_string(s)
-    time.sleep(0.1)
-    k.tap_key(k.enter_key)
-
-def _button_right(k, s):
-    k.tap_key(k.enter_key)
-    time.sleep(0.1)
-    k.type_string('/click')
-    time.sleep(0.1)
-    k.tap_key(k.space_key)
-    time.sleep(0.1)
-    k.type_string(s)
-    time.sleep(0.1)
-    k.tap_key(k.space_key)
-    k.type_string('RightButton')
-    k.tap_key(k.enter_key)
-
-def _anti_afk2(k):
-    k.tap_key('6')
-
 if __name__=='__main__':
 
     if not window.init_wow_window_pos():
@@ -155,10 +91,10 @@ if __name__=='__main__':
         time.sleep(BF_WaitingTime)
         if newbattle():
             print 'new battlefield enter now'
-            #warrior.enter_bf()
-            #warrior.jump(BF_PrepareTime)
+            warrior.enter_bf()
+            warrior.jump(BF_PrepareTime)
             print 'march to bridges'
-            #to_bridge(k)
+            to_bridge(k)
             print 'start defence'
             c = 0
             while c < BF_WinningTime :
