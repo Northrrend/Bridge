@@ -12,7 +12,6 @@ local function EventHandler(self, event, ...)
         print("")
         print("")
         print("")
-        --print("")
         print("mpo")
     end
 end

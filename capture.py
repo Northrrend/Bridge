@@ -20,25 +20,27 @@ def _window_capture(filename):
     hwnd1 = win32gui.FindWindow(0, u'魔兽世界')
     #hwndDC = win32gui.GetWindowDC(hwnd1)
     left, top, right, bottom = win32gui.GetWindowRect(hwnd1)
-    #print 'left ', left
-    #print 'right ',right
-    #print 'top ', top
-    #print 'bottom ', bottom
-    right = int(right*1.77)
-    left = int(left*1.77)
-    bottom = int(bottom*1.77)
-    top  = int(top*1.77)
+    right = int(right*2)
+    left = int(left*2)
+    bottom = int(bottom*2)
+    top  = int(top*2)
     mfcDC = win32ui.CreateDCFromHandle(hwndDC)
     saveDC = mfcDC.CreateCompatibleDC()
     saveBitMap = win32ui.CreateBitmap()
     w = right - left
     h = bottom - top
+    x1 = -65
+    y1 = -935
+    x2 = 742
+    y2 = 987
+    w = x1 + x2
+    h = y1 + y2
     saveBitMap.CreateCompatibleBitmap(mfcDC, w, h)
     saveDC.SelectObject(saveBitMap)
-    saveDC.BitBlt((0, 0), (w, h), mfcDC, (0, 0), win32con.SRCCOPY)
+    saveDC.BitBlt((x1, y1), (x2, y2), mfcDC, (0, 0), win32con.SRCCOPY)
     saveBitMap.SaveBitmapFile(saveDC, filename)
 
-def _snap_handle(filename, filename2):
+def _snap_handle2(filename, filename2):
     image = cv2.imread(filename)
     h = image.shape[0]
     w = image.shape[1]
@@ -50,6 +52,11 @@ def _snap_handle(filename, filename2):
     gray = cv2.cvtColor(cropped, cv2.COLOR_BGR2GRAY)
     cv2.imwrite(filename2, gray)
 
+def _snap_handle(filename, filename2):
+    image = cv2.imread(filename)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    cv2.imwrite(filename2, gray)
+
 #bt old old
 #bt dmd new
 #bt mmo semi
@@ -57,41 +64,27 @@ def _snap_handle(filename, filename2):
 def newbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
     _window_capture("full.jpg")
-    _snap_handle("full.jpg", "minimal.jpg")
-    text = pytesseract.image_to_string(Image.open("minimal.jpg"))
+    #_snap_handle("full.jpg", "minimal.jpg")
+    text = pytesseract.image_to_string(Image.open("full.jpg"))
     print text
     try:
-        t = str(text).splitlines()
-        if len(t) >= 1:
-            for i in 0, len(t)-1:
-                if t[i].find("old") >= 0:
-                    print 'old'
-                    return False
-                else:
-                    print 'new'
-                    return True
-        return False
+        if text.find("old") >= 0:
+            return False
+        else:
+            return True
     except:
         return False
 
 def endbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
     _window_capture("full.jpg")
-    _snap_handle("full.jpg", "minimal.jpg")
-    text = pytesseract.image_to_string(Image.open("minimal.jpg"))
+    #_snap_handle("full.jpg", "minimal.jpg")
+    text = pytesseract.image_to_string(Image.open("full.jpg"))
     print text
-    t = str(text).splitlines()
+    #t = str(text).splitlines()
     try:
-        if len(t) >=1:
-            for i in 0, len(t)-1:
-                if t[i].find("mpo") >= 0:
-                    print 'finish'
-                    return True
-            return False
-        return False
+        if text.find("mpo") >= 0:
+            return True
     except:
         return False
-        
-time.sleep(2)
-_window_capture("hahaha.jpg")
-_snap_handle("hahaha.jpg", "test.jpg")
+    return False

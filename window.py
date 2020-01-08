@@ -6,7 +6,7 @@ from PIL import ImageGrab
 import time
 
 
-SCREEN_SCALE = 1.25
+SCREEN_SCALE = 2.00
 JoinDialogBbox = (909, 212, 1240, 298)
 JoinImgName = "JoinImgFlg.png"
 LeaveDialogBbox = (985, 810, 1216, 846)
@@ -63,7 +63,8 @@ def init_wow_window_pos():
         return False
     else:
         win32gui.SetForegroundWindow(handle)
-        win32gui.MoveWindow(handle, to_real_pos(25), to_real_pos(25), to_real_pos(2099), to_real_pos(1218), True)
+        win32gui.MoveWindow(handle, to_real_pos(0), to_real_pos(0), to_real_pos(2258), to_real_pos(1270), True)
+        win32gui.SetForegroundWindow(handle)
         return True
 
 
