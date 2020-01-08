@@ -64,13 +64,12 @@ def newbattle():
         t = str(text).splitlines()
         if len(t) >= 1:
             for i in 0, len(t)-1:
-                if t[i].find("bt") >= 0:
-                    if t[i].find("old") >= 0:
-                        print 'old'
-                        return False
-                    else:
-                        print 'new'
-                        return True
+                if t[i].find("old") >= 0:
+                    print 'old'
+                    return False
+                else:
+                    print 'new'
+                    return True
         return False
     except:
         return False

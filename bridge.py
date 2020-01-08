@@ -7,10 +7,11 @@ from pymouse import *
 from pykeyboard import PyKeyboard
 import random
 from capture import *
+from role import Role
+import window
 
 global BF_WaitingTime, Logout_WaitingTime, Logout_WaitingTime, AFK_WaitingTime, BF_PrepareTime, Ave_WaitingTime
 
-# BF_WaitingTime + BF_PrepareTime = 120
 BF_WaitingTime = 5
 BF_PrepareTime = 110
 Logout_WaitingTime = 5
@@ -27,20 +28,6 @@ NPCKey = '.'
 MountKey1 = 'g'
 MountKey2 = 'q'
 
-
-def battle_field(k):
-    print 'Try to join battlefield'
-    k.tap_key(TargetKey)
-    time.sleep(0.1)
-    k.tap_key(NPCKey)
-    time.sleep(0.1)
-    _button(k, 'GossipTitleButton1')
-    time.sleep(0.1)
-    _button(k, 'BattlefieldFrameJoinButton')
-    time.sleep(0.1)
-    print 'Wait ' + str(BF_WaitingTime) + ' to enter Battlefield'
-    time.sleep(BF_WaitingTime)
-    _button(k, 'StaticPopup1Button1')
 
 def join_bf(k):
     k.tap_key(TargetKey)
@@ -118,8 +105,6 @@ def defence(k, t):
     c = 0
     while c < t :
         _anti_afk2(k)
-        #battle_field(k)
-        #r = random.randint(70, 90)
         r = 30
         time.sleep(r)
         if endbattle():
@@ -130,7 +115,7 @@ def defence(k, t):
         c = c + r
         print 'Defence end in ' + str(t - c) + ' s...'
     afk(k)
-    time.sleep(Reload_WaitingTime)
+    time.sleep(Escape_WaitingTime)
 
 
 def to_bridge(k):
@@ -200,10 +185,46 @@ def _anti_afk2(k):
     k.tap_key('6')
 
 if __name__=='__main__':
-    print 'Parent process %s.' % os.getpid()
-    i = 0  #initial role
+
+    if not window.init_wow_window_pos():
+        print('Locate wow window failed exit')
+        exit(-1)
+    
+    warrior = Role()
     k = PyKeyboard()
+    print 'Wait 2 seconds to start script'
     time.sleep(2)
+
+    while True:
+        warrior.join_bfqueue()
+        time.sleep(BF_WaitingTime)
+        if newbattle():
+            print 'new battlefield enter now'
+            warrior.enter_bf()
+            warrior.jump(BF_PrepareTime)
+            print 'march to bridges'
+            to_bridge(k)
+            print 'start defence'
+            c = 0
+            while c < BF_WinningTime :
+                warrior.anti_afk()
+                r = 30
+                time.sleep(r)
+                if endbattle():
+                    print 'battle end'
+                    warrior.quit_bf()
+                    time.sleep(Reload_WaitingTime)
+                    break
+                c = c + r
+                print 'Defence end in ' + str(BF_WaitingTime - c) + ' s...'
+            warrior.quit_bf_afk()
+            time.sleep(Escape_WaitingTime)
+        else:
+            warrior.leave_bfqueue()
+            time.sleep(0.3)
+
+    #i = 0 
+    #k = PyKeyboard()
     #while True:
     #    join_bf
     #    print 'Wait ' + str(BF_PrepareTime) + ' for battle to start'
@@ -214,17 +235,20 @@ if __name__=='__main__':
     #    i = change_role(k, i)
     #    pr
     #    int i
-    while True:
-        join_bf(k)
-        time.sleep(BF_WaitingTime)
-        if newbattle():
-            enter_bf(k)
-            print 'enter battle ...'
-            jump(k, BF_PrepareTime)
-            print 'march to bridges'
-            to_bridge(k)
-            print 'start defence'
-            defence(k, BF_WinningTime)
-        else:
-            cancel_bf2(k)
-            time.sleep(0.3)
+    
+    
+    #k = PyKeyboard()
+    #while True:
+    #    join_bf(k)
+    #    time.sleep(BF_WaitingTime)
+    #    if newbattle():
+    #        enter_bf(k)
+    #        print 'enter battle ...'
+    #        jump(k, BF_PrepareTime)
+    #        print 'march to bridges'
+    #        to_bridge(k)
+    #        print 'start defence'
+    #        defence(k, BF_WinningTime)
+    #    else:
+    #        cancel_bf2(k)
+    #        time.sleep(0.3)
