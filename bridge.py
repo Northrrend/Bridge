@@ -16,7 +16,9 @@ BF_PrepareTime = 110
 Logout_WaitingTime = 5
 Login_WaitingTime = 10
 AFK_WaitingTime = 10
-Ave_WaitingTime = 900
+BF_WinningTime = 60*40
+Reload_WaitingTime = 5
+Escape_WaitingTime = 60*15
 
 global MountKey, NPCKey
 
@@ -53,6 +55,10 @@ def enter_bf(k):
     _button(k, 'StaticPopup1Button1')
 
 def cancel_bf(k):
+    _button(k, 'DropDownList1Button3')
+
+def cancel_bf2(k):
+    _button_right(k, 'MiniMapBattlefieldFrame')
     _button(k, 'DropDownList1Button3')
 
 def quit_bf(k):
@@ -103,57 +109,62 @@ def jump(k, t):
     c = 0
     while c < t :
         k.tap_key(k.space_key)
-        r = random.randint(15, 20)
+        r = random.randint(35, 55)
         time.sleep(r)
         c = c + r   
-        print 'Defence end in ' + str(t - c) + ' s...'
+        print 'Jump end in ' + str(t - c) + ' s...'
 
 def defence(k, t):
     c = 0
     while c < t :
         _anti_afk2(k)
-        battle_field(k)
+        #battle_field(k)
         #r = random.randint(70, 90)
-        r = 50
+        r = 30
         time.sleep(r)
-        c = c + r + 10
+        if endbattle():
+            print 'battle is end ...'
+            quit_bf(k)
+            time.sleep(Reload_WaitingTime)
+            return 'end'
+        c = c + r
         print 'Defence end in ' + str(t - c) + ' s...'
+    afk(k)
+    time.sleep(Reload_WaitingTime)
 
 
-def to_bridge(k, i):
-    print 'March to bridge'
-    if i == 1:
-        march(k, 2)
-        time.sleep(0.1)
-        turn_right(k, 0.28)
-        march(k, 14)
-        time.sleep(0.2)
-        mount(k)
-        turn_right(k, 0.1)
-        march(k, 4)
-        turn_right(k, 0.28)
-        march(k, 18)
-        turn_right(k, 0.8)
-        march(k, 10)
-        mount(k)
-    else:
-        march(k, 2)
-        time.sleep(0.1)
-        turn_right(k, 0.28)
-        march(k, 14)
-        time.sleep(0.2)
-        mount(k)
-        turn_right(k, 0.1)
-        march(k, 7)
-        turn_right(k, 0.3)
-        march(k, 15)
-        turn_right(k, 0.1)
-        march(k, 15)
-        mount(k)
+def to_bridge(k):
+    march(k, 2)
+    time.sleep(0.1)
+    turn_right(k, 0.28)
+    march(k, 14)
+    time.sleep(0.2)
+    mount(k)
+    turn_right(k, 0.1)
+    march(k, 4)
+    turn_right(k, 0.28)
+    march(k, 18)
+    turn_right(k, 0.8)
+    march(k, 10)
+    mount(k)
+
+def to_bridge_small(k):
+    march(k, 2)
+    time.sleep(0.1)
+    turn_right(k, 0.28)
+    march(k, 14)
+    time.sleep(0.2)
+    mount(k)
+    turn_right(k, 0.1)
+    march(k, 7)
+    turn_right(k, 0.3)
+    march(k, 15)
+    turn_right(k, 0.1)
+    march(k, 15)
+    mount(k)
 
 def afk(k):
-    print 'Now get out of battlefield'
-    _button(k, 'WorldStateScoreFrameLeaveButton')
+    print 'Timeout get out of battlefield'
     k.tap_key(k.enter_key)
     time.sleep(0.1)
     k.type_string('/afk')
@@ -172,15 +183,17 @@ def _button(k, s):
     time.sleep(0.1)
     k.tap_key(k.enter_key)
 
-def _anti_afk(k):
+def _button_right(k, s):
     k.tap_key(k.enter_key)
     time.sleep(0.1)
-    k.type_string('/g')
+    k.type_string('/click')
     time.sleep(0.1)
     k.tap_key(k.space_key)
     time.sleep(0.1)
-    k.type_string('usb')
+    k.type_string(s)
     time.sleep(0.1)
+    k.tap_key(k.space_key)
+    k.type_string('RightButton')
     k.tap_key(k.enter_key)
 
 def _anti_afk2(k):
@@ -199,11 +212,19 @@ if __name__=='__main__':
     #    defence(k, Ave_WaitingTime)
     #    afk(k)
     #    i = change_role(k, i)
-    #    print i
-    join_bf(k)
-    time.sleep(BF_WaitingTime)
-    if newbattle():
-        enter_bf(k)
-        jump(k, BF_PrepareTime)
-    else:
-        cancel_bf(k)
+    #    pr
+    #    int i
+    while True:
+        join_bf(k)
+        time.sleep(BF_WaitingTime)
+        if newbattle():
+            enter_bf(k)
+            print 'enter battle ...'
+            jump(k, BF_PrepareTime)
+            print 'march to bridges'
+            to_bridge(k)
+            print 'start defence'
+            defence(k, BF_WinningTime)
+        else:
+            cancel_bf2(k)
+            time.sleep(0.3)

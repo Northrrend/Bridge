@@ -60,16 +60,39 @@ def newbattle():
     _snap_handle("full.jpg", "minimal.jpg")
     text = pytesseract.image_to_string(Image.open("minimal.jpg"))
     print text
+    try:
+        t = str(text).splitlines()
+        if len(t) >= 1:
+            for i in 0, len(t)-1:
+                if t[i].find("bt") >= 0:
+                    if t[i].find("old") >= 0:
+                        print 'old'
+                        return False
+                    else:
+                        print 'new'
+                        return True
+        return False
+    except:
+        return False
+
+def endbattle():
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
+    _window_capture("full.jpg")
+    _snap_handle("full.jpg", "minimal.jpg")
+    text = pytesseract.image_to_string(Image.open("minimal.jpg"))
+    print text
     t = str(text).splitlines()
-    for i in 0, len(t)-1:
-        if t[i].find("bt") >= 0:
-            if t[i].find("old") >= 0:
-                print 'old'
-                return False
-            if t[i].find("dmd") >= 0:
-                print 'new'
-                return True
-            if t[i].find("mmo") >= 0:
-                print 'semi'
-                return True
-    return False
+    try:
+        if len(t) >=1:
+            for i in 0, len(t)-1:
+                if t[i].find("mpo") >= 0:
+                    print 'finish'
+                    return True
+            return False
+        return False
+    except:
+        return False
+        
+time.sleep(2)
+_window_capture("hahaha.jpg")
+_snap_handle("hahaha.jpg", "test.jpg")
