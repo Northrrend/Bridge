@@ -5,8 +5,13 @@ local function EventHandler(self, event, ...)
 
     if event == "BAG_UPDATE" then
         local name = ...
-        print("mpo")
-        print("mpo")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
         print("mpo")
     end
 end
