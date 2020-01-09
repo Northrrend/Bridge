@@ -29,7 +29,7 @@ class KeyboardActionExecute(threading.Thread):
                 if obj['name'] == 'keyboard':
                     if obj['event'] == 'press':
                         keyboard_exec.press(KeyCode.from_vk(obj['vk']))
-                        time.sleep(0.01)
+                        time.sleep(0.04)
 
                     elif obj['event'] == 'release':
                         keyboard_exec.release(KeyCode.from_vk(obj['vk']))

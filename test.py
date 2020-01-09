@@ -15,13 +15,8 @@ import os
 from ctypes import *
 from ctypes.wintypes import *
 import ctypes
+import replay
 
-if not window.init_wow_window_pos():
-        print('Locate wow window failed exit')
-        exit(-1)
-else:
-    print 'success'
-    capture._window_capture("hahaha.jpg")
-    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-    text = pytesseract.image_to_string(Image.open("hahaha.jpg"))
-    print text
+time.sleep(2)
+print 'start replay'
+replay.action('keyboard.action')

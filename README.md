@@ -12,3 +12,5 @@ pip install pillow
 
 pip install pytesseract
 
+pip install pynput
+
