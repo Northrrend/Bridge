@@ -61,7 +61,7 @@ class Role(object):
         self.k.tap_key(self.AntiAFKKey)
     
     def all_a(self):
-        self.k.tap_key('RaidFrameAllAssistCheckButton')
+        self._left_click('RaidFrameAllAssistCheckButton')
     
     def _left_click(self, s):
         self.k.tap_key(self.k.enter_key)
