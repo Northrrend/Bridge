@@ -13,6 +13,10 @@ local function EventHandler(self, event, ...)
         print("")
         print("")
         print("mpo")
+        for i= 1, 7 do
+            SELECTED_CHAT_FRAME:AddMessage("\n")
+        end
+        SELECTED_CHAT_FRAME:AddMessage("mpo")
     end
 end
 

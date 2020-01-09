@@ -324,23 +324,15 @@ RegEvent("ADDON_LOADED", function()
                     local text = color:WrapTextInColorCode(L["List Position"] .. " " .. string.format("%d/%d", pos, total))
                     local i = total - pos
                     if i > 4 then
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("  old");
+                        for i= 1, 7 do
+                            SELECTED_CHAT_FRAME:AddMessage("\n")
+                        end
+                        SELECTED_CHAT_FRAME:AddMessage("  old");
                     else
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("");
-                        DEFAULT_CHAT_FRAME:AddMessage("  mmo");
+                        for i= 1, 7 do
+                            SELECTED_CHAT_FRAME:AddMessage("\n")
+                        end
+                        SELECTED_CHAT_FRAME:AddMessage("  mmo");
                     end
                     local elp = GetElapseFromCache(mapName, toJ)
                     if elp then
@@ -349,14 +341,10 @@ RegEvent("ADDON_LOADED", function()
 
                     self.text:SetText(string.gsub(tx ,toJ , YELLOW_FONT_COLOR:WrapTextInColorCode(toJ) .. "(" .. text .. ")"))
                 else
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("  dmd");
+                    for i= 1, 7 do
+                        SELECTED_CHAT_FRAME:AddMessage("\n")
+                    end
+                    SELECTED_CHAT_FRAME:AddMessage("  dmd");
                     local text = GREEN_FONT_COLOR:WrapTextInColorCode(L["New"])
                     self.text:SetText(string.gsub(tx ,toJ , YELLOW_FONT_COLOR:WrapTextInColorCode(toJ) .. "(" .. text .. ")"))
                 end
