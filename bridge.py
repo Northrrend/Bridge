@@ -107,9 +107,9 @@ if __name__=='__main__':
                     time.sleep(Reload_WaitingTime)
                     break
                 c = c + r
-                print 'Defence end in ' + str(BF_WaitingTime - c) + ' s...'
+                print 'Defence end in ' + str(BF_WinningTime - c) + ' s...'
             warrior.quit_bf_afk()
-            time.sleep(Escape_WaitingTime)
+            #time.sleep(Escape_WaitingTime)
         else:
             print 'old leave'
             warrior.leave_bfqueue()

@@ -69,8 +69,12 @@ def newbattle():
     try:
         if text.find("old") >= 0:
             return False
-        else:
+        elif text.find("dmd") >= 0:
             return True
+        elif text.find("mmo") >= 0:
+            return True
+        else:
+            return False
     except:
         return False
 
