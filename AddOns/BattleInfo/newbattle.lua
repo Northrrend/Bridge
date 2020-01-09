@@ -304,14 +304,6 @@ RegEvent("ADDON_LOADED", function()
             toJ = tonumber(toJ)
             if toJ then
                 if instanceIDs[toJ] then
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("");
-                    DEFAULT_CHAT_FRAME:AddMessage("bt   old");
                     -- first half 0 - rate -> red (0)
                     -- second half rate - 100% -> red(0) -> yellow (1)
                     local rate = 0.45

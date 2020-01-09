@@ -5,14 +5,6 @@ local function EventHandler(self, event, ...)
 
     if event == "BAG_UPDATE" then
         local name = ...
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print("mpo")
         for i= 1, 7 do
             SELECTED_CHAT_FRAME:AddMessage("\n")
         end

@@ -82,6 +82,7 @@ if __name__=='__main__':
         exit(-1)
 
     warrior = Role()
+    warrior.change_chatframe()
     k = PyKeyboard()
     print 'Wait 1 seconds to start script'
     time.sleep(1)
@@ -92,6 +93,7 @@ if __name__=='__main__':
         if newbattle():
             print 'new battlefield enter now'
             warrior.enter_bf()
+            warrior.all_a()
             warrior.jump(BF_PrepareTime)
             print 'march to bridges'
             to_bridge(k)

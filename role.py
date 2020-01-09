@@ -9,7 +9,7 @@ class Role(object):
 
     def __init__(self):
         self.k = PyKeyboard()
-        self.TargetKey = 'g'
+        self.TargetKey = ','
         self.NPCKey = '.'
         self.MountKey1 = 'g'
         self.MountKey2 = 'q'
@@ -54,9 +54,14 @@ class Role(object):
             r = random.randint(35, 55)
             time.sleep(r)
             c = c + r   
+    def change_chatframe(self):
+        self._left_click('ChatFrame4Tab')
 
     def anti_afk(self):
         self.k.tap_key(self.AntiAFKKey)
+    
+    def all_a(self):
+        self.k.tap_key('RaidFrameAllAssistCheckButton')
     
     def _left_click(self, s):
         self.k.tap_key(self.k.enter_key)
