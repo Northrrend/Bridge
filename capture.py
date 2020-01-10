@@ -65,8 +65,8 @@ def newbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
     _window_capture("full.jpg")
     text = pytesseract.image_to_string(Image.open("full.jpg"))
-    print text
     try:
+        print text
         if text.find("old") >= 0:
             return False
         elif text.find("dmd") >= 0:
