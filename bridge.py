@@ -9,6 +9,7 @@ import random
 from capture import *
 from role import Role
 import window
+import account
 
 
 BF_WaitingTime = 5
@@ -81,6 +82,7 @@ if __name__=='__main__':
         print('Locate wow window failed exit')
         exit(-1)
 
+    account.login()
     warrior = Role()
     warrior.change_chatframe()
     k = PyKeyboard()

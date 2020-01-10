@@ -16,7 +16,7 @@ from ctypes import *
 from ctypes.wintypes import *
 import ctypes
 import replay
+import account
 
 time.sleep(2)
-print 'start replay'
-replay.action('keyboard.action')
+account.login()
