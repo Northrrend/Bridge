@@ -83,6 +83,7 @@ if __name__=='__main__':
         exit(-1)
 
     account.login()
+    time.sleep(2)
     warrior = Role()
     warrior.change_chatframe()
     k = PyKeyboard()
@@ -95,6 +96,7 @@ if __name__=='__main__':
         if newbattle():
             print 'new battlefield enter now'
             warrior.enter_bf()
+            time.sleep(Reload_WaitingTime)
             warrior.all_a()
             warrior.jump(BF_PrepareTime)
             print 'march to bridges'
