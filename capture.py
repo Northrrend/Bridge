@@ -13,6 +13,9 @@ import os
 from ctypes import *
 from ctypes.wintypes import *
 import ctypes
+import account
+from pymouse import *
+from pykeyboard import PyKeyboard
 
 def _window_capture(filename):
     hwnd = 0
@@ -65,8 +68,8 @@ def newbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
     _window_capture("full.jpg")
     text = pytesseract.image_to_string(Image.open("full.jpg"))
-    print text
     try:
+        print text
         if text.find("old") >= 0:
             return False
         elif text.find("dmd") >= 0:
@@ -75,7 +78,10 @@ def newbattle():
             return True
         else:
             return False
-    except:
+    except UnicodeEncodeError:
+        #k = PyKeyboard()
+        #k.tap_key(k.enter_key)
+        #account.login()
         return False
 
 def endbattle():

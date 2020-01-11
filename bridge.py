@@ -102,8 +102,8 @@ if __name__=='__main__':
             print 'march to bridges'
             to_bridge(k)
             print 'start defence'
-            c = 0
-            while c < BF_WinningTime :
+            t = 0
+            while t < BF_WinningTime :
                 warrior.anti_afk()
                 r = 30
                 time.sleep(r)
@@ -112,10 +112,12 @@ if __name__=='__main__':
                     warrior.quit_bf()
                     time.sleep(Reload_WaitingTime)
                     break
-                c = c + r
-                print 'Defence end in ' + str(BF_WinningTime - c) + ' s...'
-            warrior.quit_bf_afk()
-            #time.sleep(Escape_WaitingTime)
+                t = t + r
+                print 'Defence end in ' + str(BF_WinningTime - t) + ' s...'
+            if t >= BF_WinningTime :
+                warrior.quit_bf_afk()
+                #time.sleep(Reload_WaitingTime)
+                time.sleep(Escape_WaitingTime)
         else:
             print 'old leave'
             warrior.leave_bfqueue()
