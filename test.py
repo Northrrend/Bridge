@@ -15,8 +15,10 @@ import os
 from ctypes import *
 from ctypes.wintypes import *
 import ctypes
-import replay
 import account
+import KeymouseGo
+from role import Role
 
 time.sleep(2)
-account.login()
+warrior = Role()
+warrior.quit_bf2()
