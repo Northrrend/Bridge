@@ -83,6 +83,25 @@ class Role(object):
     def all_a(self):
         self._left_click('RaidFrameAllAssistCheckButton')
         return 0.5
+    
+    def to_bridge(self):
+        t = 0
+        t = t + self.march(2)
+        time.sleep(0.1)
+        t + t + 0.1
+        t = t + self.turn_right(0.28)
+        t = t + self.march(14)
+        time.sleep(0.2)
+        t + t + 0.2
+        t = t + self.mount()
+        t = t + self.turn_right(0.1)
+        t = t + self.march(4)
+        t = t + self.turn_right(0.28)
+        t = t + self.march(18)
+        t = t + self.turn_right(0.8)
+        t = t + self.march(10)
+        t = t + self.mount()
+        return t
 
     def donate(self):
         pass
@@ -91,6 +110,38 @@ class Role(object):
         filename = 'to_gate.txt'
         t = KeymouseGo.single_run(filename)
         return t
+    
+    def march(self, t):
+        self.k.press_key('w')
+        time.sleep(t)
+        self.k.release_key('w')
+        return t
+    
+    def turn_right(self, t):
+        self.k.press_key(self.k.right_key)
+        time.sleep(t)
+        self.k.release_key(self.k.right_key)
+        return t
+    
+    def change_role(self, i):
+        if i == 0:
+            i = 1
+            key = self.k.down_key
+        else:
+            i = 0 
+            key = self.k.up_key
+        self.k.tap_key(self.k.enter_key)
+        time.sleep(0.1)
+        self.k.type_string('/logout')
+        time.sleep(0.1)
+        self.k.tap_key(self.k.enter_key)
+        time.sleep(0.1)
+        time.sleep(10)
+        self.k.tap_key(key)
+        time.sleep(0.1)
+        self.k.tap_key(self.k.enter_key)
+        time.sleep(10)
+        return i
     
     def _left_click(self, s):
         # total time 0.5
