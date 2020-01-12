@@ -1,7 +1,6 @@
 import logging
 import time
 import pymouse,pykeyboard,os,sys
-from pymouse import *
 from pykeyboard import PyKeyboard
 import random
 import KeymouseGo
@@ -13,10 +12,11 @@ class Role(object):
         self.TargetKey = ','
         self.NPCKey = '.'
         self.MountKey1 = 'g'
-        self.MountKey2 = 'q'
         self.AntiAFKKey = '6'
 
     def join_bfqueue(self):
+        #This is used to prevent bad guy to summon you
+        self._left_click('StaticPopup1Button2')
         self.k.tap_key(self.TargetKey)
         time.sleep(0.1)
         self.k.tap_key(self.NPCKey)
@@ -25,26 +25,25 @@ class Role(object):
         time.sleep(0.1)
         self._left_click('BattlefieldFrameJoinButton')
         time.sleep(0.1)
-        return 0.4
 
     def leave_bfqueue(self):
         self._right_click('MiniMapBattlefieldFrame')
         self._left_click('DropDownList1Button3')
-        return 1.2
     
     def enter_bf(self):
         self._left_click('StaticPopup1Button1')
-        return 0.5
+
+    def enter_bf2(self):
+        self._right_click('MiniMapBattlefieldFrame')
+        self._left_click('DropDownList1Button2')
 
     def quit_bf(self):
         self._left_click('WorldStateScoreFrameLeaveButton')
-        return 0.5
     
     def quit_bf2(self):
         self._left_click('WorldStateScoreFrameLeaveButton')
         time.sleep(5)
         self._left_click('StaticPopup1Button1')
-        return 0.5
     
     def quit_bf_afk(self):
         self.k.tap_key(self.k.enter_key)
@@ -53,7 +52,6 @@ class Role(object):
         time.sleep(0.1)
         self.k.tap_key(self.k.enter_key)
         time.sleep(0.1)
-        return 0.3
     
     def mount(self):
         self.k.press_key(self.k.alt_key)
@@ -73,7 +71,6 @@ class Role(object):
 
     def change_chatframe(self):
         self._left_click('ChatFrame4Tab')
-        return 0.5
 
     def anti_afk(self):
         self.k.tap_key(self.AntiAFKKey)
@@ -85,23 +82,20 @@ class Role(object):
         return 0.5
     
     def to_bridge(self):
-        t = 0
-        t = t + self.march(2)
+        self.march(2)
         time.sleep(0.1)
-        t + t + 0.1
-        t = t + self.turn_right(0.28)
-        t = t + self.march(14)
+        self.turn_right(0.28)
+        self.march(14)
         time.sleep(0.2)
-        t + t + 0.2
-        t = t + self.mount()
-        t = t + self.turn_right(0.1)
-        t = t + self.march(4)
-        t = t + self.turn_right(0.28)
-        t = t + self.march(18)
-        t = t + self.turn_right(0.8)
-        t = t + self.march(10)
-        t = t + self.mount()
-        return t
+        self.mount()
+        self.turn_right(0.1)
+        self.march(4)
+        self.turn_right(0.28)
+        self.march(18)
+        self.turn_right(0.8)
+        self.march(10)
+        self.mount()
+        return 52
 
     def donate(self):
         pass
@@ -115,13 +109,11 @@ class Role(object):
         self.k.press_key('w')
         time.sleep(t)
         self.k.release_key('w')
-        return t
     
     def turn_right(self, t):
         self.k.press_key(self.k.right_key)
         time.sleep(t)
         self.k.release_key(self.k.right_key)
-        return t
     
     def change_role(self, i):
         if i == 0:
