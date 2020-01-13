@@ -5,7 +5,6 @@ import win32gui, win32ui, win32con, win32api
 import sys
 #sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
 #sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='gb18030')  
-from PIL import Image
 import pytesseract
 import argparse
 import cv2
@@ -16,34 +15,56 @@ import ctypes
 import account
 from pymouse import *
 from pykeyboard import PyKeyboard
+from PIL import Image
+
+SCREEN_SCALE = 1.5
+SCREEN_W = 1960
+SCREEN_H = 1080
+GAME_SCALE = 0.7
+GAME_W = SCREEN_W*GAME_SCALE
+GAME_H = SCREEN_H*GAME_SCALE
+
+def _to_real_pos(pos):
+    return int(float(pos) / SCREEN_SCALE)
+
+def init_wow_window_pos():
+    handle = win32gui.FindWindow("GxWindowClass", None)
+    print "WOW window id = %s" % handle
+    if handle == 0:
+        print "Can not find Wow window!"
+        return False
+    else:
+        win32gui.SetForegroundWindow(handle)
+        win32gui.MoveWindow(handle, _to_real_pos(0), _to_real_pos(0), _to_real_pos(GAME_W), _to_real_pos(GAME_H), True)
+        win32gui.SetForegroundWindow(handle)
+        return True
 
 def _window_capture(filename):
     hwnd = 0
     hwndDC = win32gui.GetWindowDC(hwnd)
     hwnd1 = win32gui.FindWindow(0, u'魔兽世界')
-    #hwndDC = win32gui.GetWindowDC(hwnd1)
-    left, top, right, bottom = win32gui.GetWindowRect(hwnd1)
-    right = int(right*2)
-    left = int(left*2)
-    bottom = int(bottom*2)
-    top  = int(top*2)
+    #left, top, right, bottom = win32gui.GetWindowRect(hwnd1)
+    #right = int(right)
+    #left = int(left)
+    #bottom = int(bottom)
+    #top  = int(top)
+    #print str(left), str(right), str(top), str(bottom)
     mfcDC = win32ui.CreateDCFromHandle(hwndDC)
     saveDC = mfcDC.CreateCompatibleDC()
     saveBitMap = win32ui.CreateBitmap()
-    w = right - left
-    h = bottom - top
-    x1 = -65
-    y1 = -935
-    x2 = 742
-    y2 = 987
+    x1 = -(GAME_W*55/1960)
+    y1 = -(GAME_H*664/1080)
+    x2 = GAME_W*634/1960
+    y2 = GAME_H*839/1080
     w = x1 + x2
-    h = y1 + y2
-    saveBitMap.CreateCompatibleBitmap(mfcDC, w, h)
+    h = (y1 + y2)/6
+    y1 = -(y2 - h)
+    saveBitMap.CreateCompatibleBitmap(mfcDC, int(w), int(h))
     saveDC.SelectObject(saveBitMap)
-    saveDC.BitBlt((x1, y1), (x2, y2), mfcDC, (0, 0), win32con.SRCCOPY)
+    saveDC.BitBlt((int(x1), int(y1)), (int(x2), int(y2)), mfcDC, (0, 0), win32con.SRCCOPY)
     saveBitMap.SaveBitmapFile(saveDC, filename)
 
-def _snap_handle2(filename, filename2):
+def _snap_cut(filename, filename2):
     image = cv2.imread(filename)
     h = image.shape[0]
     w = image.shape[1]
@@ -67,7 +88,8 @@ def _snap_handle(filename, filename2):
 def newbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
     _window_capture("full.jpg")
-    text = pytesseract.image_to_string(Image.open("full.jpg"))
+    _snap_handle("full.jpg", "gray.jpg")
+    text = pytesseract.image_to_string(Image.open("gray.jpg"))
     try:
         print text
         if text.find("old") >= 0:

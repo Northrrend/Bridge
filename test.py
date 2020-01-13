@@ -1,5 +1,3 @@
-import window
-import capture
 # -*- coding: utf-8 -*-
 import time
 import io
@@ -18,7 +16,11 @@ import ctypes
 import account
 import KeymouseGo
 from role import Role
+import capture
 
 time.sleep(2)
-warrior = Role()
-warrior.quit_bf2()
+
+if not capture.init_wow_window_pos():
+        print('Locate wow window failed exit')
+        exit(-1)
+capture.newbattle()

@@ -78,11 +78,11 @@ def to_bridge(k):
 
 if __name__=='__main__':
 
-    if not window.init_wow_window_pos():
+    if not init_wow_window_pos():
         print('Locate wow window failed exit')
         exit(-1)
 
-    account.login()
+    #account.login()
     time.sleep(2)
     warrior = Role()
     warrior.change_chatframe()
