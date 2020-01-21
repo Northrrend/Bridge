@@ -4,17 +4,11 @@ import pytesseract
 import cv2
 from PIL import Image
 
-SCREEN_SCALE = 1.5
-SCREEN_W = 1960
-SCREEN_H = 1080
-GAME_SCALE = 0.7
-GAME_W = SCREEN_W*GAME_SCALE
-GAME_H = SCREEN_H*GAME_SCALE
 
 def _to_real_pos(pos):
     return int(float(pos) / SCREEN_SCALE)
 
-def init_wow_window_pos():
+def init_wow_window_pos(w, h):
     handle = win32gui.FindWindow("GxWindowClass", None)
     print "WOW window id = %s" % handle
     if handle == 0:
@@ -22,7 +16,7 @@ def init_wow_window_pos():
         return False
     else:
         win32gui.SetForegroundWindow(handle)
-        win32gui.MoveWindow(handle, _to_real_pos(0), _to_real_pos(0), _to_real_pos(GAME_W), _to_real_pos(GAME_H), True)
+        win32gui.MoveWindow(handle, _to_real_pos(0), _to_real_pos(0), _to_real_pos(w), _to_real_pos(h), True)
         win32gui.SetForegroundWindow(handle)
         return True
 

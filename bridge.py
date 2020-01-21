@@ -21,9 +21,17 @@ BF_WinningTime = 60*40
 Reload_WaitingTime = 5
 Escape_WaitingTime = 60*15
 
+virtual = 1
+SCREEN_SCALE = 1.5
+SCREEN_W = 1960
+SCREEN_H = 1080
+GAME_SCALE = 1.0
+GAME_W = SCREEN_W*GAME_SCALE
+GAME_H = SCREEN_H*GAME_SCALE
+
 if __name__=='__main__':
 
-    if not init_wow_window_pos():
+    if not init_wow_window_pos(GAME_W, GAME_H):
         print('Locate wow window failed exit')
         exit(-1)
 
