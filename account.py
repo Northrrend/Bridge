@@ -1,9 +1,7 @@
 import logging
 import time
 import pymouse,pykeyboard,os,sys
-from pymouse import *
 from pykeyboard import PyKeyboard
-import random
 
 def login():
     username = ''
