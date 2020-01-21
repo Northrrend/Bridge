@@ -11,4 +11,5 @@
 ## X-Revision: Ironman
 
 event.lua
+petStatusFrame.lua
 
