@@ -1,20 +1,7 @@
 # -*- coding: utf-8 -*-
-import time
-import io
 import win32gui, win32ui, win32con, win32api
-import sys
-#sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
-#sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='gb18030')  
 import pytesseract
-import argparse
 import cv2
-import os
-from ctypes import *
-from ctypes.wintypes import *
-import ctypes
-import account
-from pymouse import *
-from pykeyboard import PyKeyboard
 from PIL import Image
 
 SCREEN_SCALE = 1.5
@@ -42,13 +29,6 @@ def init_wow_window_pos():
 def _window_capture(filename):
     hwnd = 0
     hwndDC = win32gui.GetWindowDC(hwnd)
-    hwnd1 = win32gui.FindWindow(0, u'魔兽世界')
-    #left, top, right, bottom = win32gui.GetWindowRect(hwnd1)
-    #right = int(right)
-    #left = int(left)
-    #bottom = int(bottom)
-    #top  = int(top)
-    #print str(left), str(right), str(top), str(bottom)
     mfcDC = win32ui.CreateDCFromHandle(hwndDC)
     saveDC = mfcDC.CreateCompatibleDC()
     saveBitMap = win32ui.CreateBitmap()
