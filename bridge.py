@@ -65,7 +65,6 @@ if __name__=='__main__':
                 print 'Defence end in ' + str(BF_WinningTime - t) + ' s...'
             if t >= BF_WinningTime :
                 warrior.quit_bf_afk()
-                #time.sleep(Reload_WaitingTime)
                 time.sleep(Escape_WaitingTime)
         else:
             print 'old leave'
