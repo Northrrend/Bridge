@@ -9,7 +9,6 @@ from pykeyboard import PyKeyboard
 import random
 from capture import *
 from role import Role
-import window
 import account
 
 
