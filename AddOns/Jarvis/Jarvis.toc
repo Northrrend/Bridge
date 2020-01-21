@@ -10,6 +10,12 @@
 ## SavedVariablesPerCharacter: JARRVISSettings
 ## X-Revision: Ironman
 
-event.lua
-jarvis.lua
 
+
+locales.lua
+
+event.lua
+options.lua
+utils.lua
+
+jarvis.lua
