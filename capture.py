@@ -4,11 +4,18 @@ import pytesseract
 import cv2
 from PIL import Image
 
+virtual = 1
+SCREEN_SCALE = 1.25
+SCREEN_W = 1920
+SCREEN_H = 1080
+GAME_SCALE = 0.8
+GAME_W = SCREEN_W*GAME_SCALE
+GAME_H = SCREEN_H*GAME_SCALE
 
-def _to_real_pos(pos):
-    return int(float(pos) / SCREEN_SCALE)
+def _to_real_pos(pos, scale):
+    return int(float(pos) / scale)
 
-def init_wow_window_pos(w, h):
+def init_wow_window_pos(w, h, scale):
     handle = win32gui.FindWindow("GxWindowClass", None)
     print "WOW window id = %s" % handle
     if handle == 0:
@@ -16,7 +23,7 @@ def init_wow_window_pos(w, h):
         return False
     else:
         win32gui.SetForegroundWindow(handle)
-        win32gui.MoveWindow(handle, _to_real_pos(0), _to_real_pos(0), _to_real_pos(w), _to_real_pos(h), True)
+        win32gui.MoveWindow(handle, _to_real_pos(0, scale), _to_real_pos(0, scale), _to_real_pos(w, scale), _to_real_pos(h, scale), True)
         win32gui.SetForegroundWindow(handle)
         return True
 
@@ -33,6 +40,23 @@ def _window_capture(filename):
     w = x1 + x2
     h = (y1 + y2)/6
     y1 = -(y2 - h)
+    saveBitMap.CreateCompatibleBitmap(mfcDC, int(w), int(h))
+    saveDC.SelectObject(saveBitMap)
+    saveDC.BitBlt((int(x1), int(y1)), (int(x2), int(y2)), mfcDC, (0, 0), win32con.SRCCOPY)
+    saveBitMap.SaveBitmapFile(saveDC, filename)
+
+def _window_capture2(filename):
+    hwnd = 0
+    hwndDC = win32gui.GetWindowDC(hwnd)
+    mfcDC = win32ui.CreateDCFromHandle(hwndDC)
+    saveDC = mfcDC.CreateCompatibleDC()
+    saveBitMap = win32ui.CreateBitmap()
+    x1 = -9
+    y1 = -40
+    x2 = 180
+    y2 = 65
+    w = x1 + x2
+    h = y1 + y2
     saveBitMap.CreateCompatibleBitmap(mfcDC, int(w), int(h))
     saveDC.SelectObject(saveBitMap)
     saveDC.BitBlt((int(x1), int(y1)), (int(x2), int(y2)), mfcDC, (0, 0), win32con.SRCCOPY)
