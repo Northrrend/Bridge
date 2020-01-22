@@ -24,14 +24,15 @@ virtual = 1
 SCREEN_SCALE = 1.25
 SCREEN_W = 1960
 SCREEN_H = 1080
-GAME_SCALE = 0.7
+GAME_SCALE = 0.8
 GAME_W = SCREEN_W*GAME_SCALE
 GAME_H = SCREEN_H*GAME_SCALE
 
-if not capture.init_wow_window_pos(GAME_W, GAME_H, SCREEN_SCALE):
+if not capture.activate_wow_window():
         print('Locate wow window failed exit')
         exit(-1)
-capture._window_capture2("hahaha.jpg")
+time.sleep(2)
+capture._window_capture3("hahaha.jpg")
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
 text = pytesseract.image_to_string(Image.open("hahaha.jpg"))
 print text

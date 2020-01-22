@@ -31,14 +31,19 @@ GAME_H = SCREEN_H*GAME_SCALE
 
 if __name__=='__main__':
 
-    if not init_wow_window_pos(GAME_W, GAME_H, SCREEN_SCALE):
-        print('Locate wow window failed exit')
-        exit(-1)
+    if virtual == 1:
+        if not activate_wow_window():
+            print('Locate wow window failed exit')
+            exit(-1)
+    else:
+        if not init_wow_window_pos(GAME_W, GAME_H, SCREEN_SCALE):
+            print('Locate wow window failed exit')
+            exit(-1)
 
     #account.login()
     time.sleep(2)
     warrior = Role()
-    warrior.change_chatframe()
+    #warrior.change_chatframe()
     dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
     print dt_ms + 'Wait 1 seconds to start script'
     time.sleep(1)
@@ -74,6 +79,7 @@ if __name__=='__main__':
                 warrior.quit_bf_afk()
                 time.sleep(Escape_WaitingTime)
         else:
-            print 'old leave'
+            dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
+            print dt_ms + 'old battlefield leave'
             warrior.leave_bfqueue()
             time.sleep(0.3)

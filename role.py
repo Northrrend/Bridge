@@ -18,13 +18,13 @@ class Role(object):
         #This is used to prevent bad guy to summon you
         self._left_click('StaticPopup1Button2')
         self.k.tap_key(self.TargetKey)
-        time.sleep(0.1)
+        time.sleep(0.2)
         self.k.tap_key(self.NPCKey)
-        time.sleep(0.1)
+        time.sleep(0.2)
         self._left_click('GossipTitleButton1')
-        time.sleep(0.1)
+        time.sleep(0.2)
         self._left_click('BattlefieldFrameJoinButton')
-        time.sleep(0.1)
+        time.sleep(0.2)
 
     def leave_bfqueue(self):
         self._right_click('MiniMapBattlefieldFrame')
