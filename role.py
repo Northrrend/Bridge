@@ -20,11 +20,11 @@ class Role(object):
         self.k.tap_key(self.TargetKey)
         time.sleep(0.2)
         self.k.tap_key(self.NPCKey)
-        time.sleep(0.2)
+        time.sleep(0.5)
         self._left_click('GossipTitleButton1')
-        time.sleep(0.2)
+        time.sleep(0.5)
         self._left_click('BattlefieldFrameJoinButton')
-        time.sleep(0.2)
+        time.sleep(0.1)
 
     def leave_bfqueue(self):
         self._right_click('MiniMapBattlefieldFrame')
