@@ -18,6 +18,11 @@ end
 
 local statusFrame = CreateFrame("Frame", "petStatusFrame")
 
+--GameWidth = GetScreenWidth()
+--GameHeight = GetScreenHeight()
+
+--print(GameWidth)
+--print(GameHeight)
 ----------------------------------------
 -- 状态框初始化函数
 ----------------------------------------
@@ -309,7 +314,7 @@ RegEvent("ADDON_LOADED", function()
 					if i > 4 then 
 						statusFrame:Update("OLD")
 					else
-						statusFrame:Update("NEW")
+						statusFrame:Update("BTO")
 					end
                     local pos0 = math.max(pos - total * rate - 1, 0)
 
@@ -323,7 +328,7 @@ RegEvent("ADDON_LOADED", function()
 
                     self.text:SetText(string.gsub(tx ,toJ , YELLOW_FONT_COLOR:WrapTextInColorCode(toJ) .. "(" .. text .. ")"))
 			else
-				statusFrame:Update("NEW")
+				statusFrame:Update("BTO")
                 local text = GREEN_FONT_COLOR:WrapTextInColorCode(L["New"])
                 self.text:SetText(string.gsub(tx ,toJ , YELLOW_FONT_COLOR:WrapTextInColorCode(toJ) .. "(" .. text .. ")"))
 

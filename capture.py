@@ -4,7 +4,6 @@ import pytesseract
 import cv2
 from PIL import Image
 
-virtual = 1
 SCREEN_SCALE = 1.25
 SCREEN_W = 1920
 SCREEN_H = 1080
@@ -27,6 +26,16 @@ def init_wow_window_pos(w, h, scale):
         win32gui.SetForegroundWindow(handle)
         return True
 
+def activate_wow_window():
+    handle = win32gui.FindWindow("GxWindowClass", None)
+    print "WOW window id = %s" % handle
+    if handle == 0:
+        print "Can not find Wow window!"
+        return False
+    else:
+        win32gui.SetForegroundWindow(handle)
+        return True
+
 def _window_capture(filename):
     hwnd = 0
     hwndDC = win32gui.GetWindowDC(hwnd)
@@ -45,16 +54,16 @@ def _window_capture(filename):
     saveDC.BitBlt((int(x1), int(y1)), (int(x2), int(y2)), mfcDC, (0, 0), win32con.SRCCOPY)
     saveBitMap.SaveBitmapFile(saveDC, filename)
 
-def _window_capture2(filename):
+def _window_capture3(filename):
     hwnd = 0
     hwndDC = win32gui.GetWindowDC(hwnd)
     mfcDC = win32ui.CreateDCFromHandle(hwndDC)
     saveDC = mfcDC.CreateCompatibleDC()
     saveBitMap = win32ui.CreateBitmap()
-    x1 = -9
-    y1 = -40
-    x2 = 180
-    y2 = 65
+    x1 = 0
+    y1 = 0
+    x2 = 200 * SCREEN_SCALE
+    y2 = 30 * SCREEN_SCALE
     w = x1 + x2
     h = y1 + y2
     saveBitMap.CreateCompatibleBitmap(mfcDC, int(w), int(h))
@@ -79,22 +88,17 @@ def _snap_handle(filename, filename2):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     cv2.imwrite(filename2, gray)
 
-#bt old old
-#bt dmd new
-#bt mmo semi
-#bt mpo finish
 def newbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-    _window_capture("full.jpg")
-    _snap_handle("full.jpg", "gray.jpg")
-    text = pytesseract.image_to_string(Image.open("gray.jpg"))
+    _window_capture3("full.jpg")
+    text = pytesseract.image_to_string(Image.open("full.jpg"))
     try:
-        print text
+        #print text
         if text.find("OLD") >= 0:
             return False
         elif text.find("SEMI") >= 0:
             return True
-        elif text.find("NEW") >= 0:
+        elif text.find("BTO") >= 0:
             return True
         else:
             return False
@@ -106,9 +110,9 @@ def newbattle():
 
 def endbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-    _window_capture("full.jpg")
+    _window_capture3("full.jpg")
     text = pytesseract.image_to_string(Image.open("full.jpg"))
-    print text
+    #print text
     try:
         if text.find("END") >= 0:
             return True
