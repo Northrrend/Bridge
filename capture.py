@@ -4,6 +4,7 @@ import pytesseract
 import cv2
 from PIL import Image
 
+virtual = 1
 SCREEN_SCALE = 1.25
 SCREEN_W = 1920
 SCREEN_H = 1080
@@ -62,8 +63,11 @@ def _window_capture3(filename):
     saveBitMap = win32ui.CreateBitmap()
     x1 = 0
     y1 = 0
-    x2 = 200 * SCREEN_SCALE
-    y2 = 30 * SCREEN_SCALE
+    x2 = 200
+    y2 = 30
+    if virtual == 0 :
+        x2 = x2 * SCREEN_SCALE
+        y2 = y2 * SCREEN_SCALE
     w = x1 + x2
     h = y1 + y2
     saveBitMap.CreateCompatibleBitmap(mfcDC, int(w), int(h))
