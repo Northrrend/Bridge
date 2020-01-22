@@ -355,7 +355,7 @@ end)
 jarvisModel:AddReg("ITEM_PUSH",function(...)
 statusFrame:UpdateVisibility()
 	if not statusFrame:IsShown() then return end
-	local code = "ITEM_PUSH"
+	local code = "END"
 	statusFrame:Update(code)
 
 end)

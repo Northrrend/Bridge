@@ -90,11 +90,11 @@ def newbattle():
     text = pytesseract.image_to_string(Image.open("gray.jpg"))
     try:
         print text
-        if text.find("old") >= 0:
+        if text.find("OLD") >= 0:
             return False
-        elif text.find("dmd") >= 0:
+        elif text.find("SEMI") >= 0:
             return True
-        elif text.find("mmo") >= 0:
+        elif text.find("NEW") >= 0:
             return True
         else:
             return False
@@ -110,7 +110,7 @@ def endbattle():
     text = pytesseract.image_to_string(Image.open("full.jpg"))
     print text
     try:
-        if text.find("mpo") >= 0:
+        if text.find("END") >= 0:
             return True
     except:
         return False
