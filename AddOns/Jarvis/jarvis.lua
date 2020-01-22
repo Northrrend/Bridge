@@ -360,7 +360,7 @@ end)
 jarvisModel:AddReg("ITEM_PUSH",function(...)
 statusFrame:UpdateVisibility()
 	if not statusFrame:IsShown() then return end
-	local code = "END"
+	local code = "MMO"
 	statusFrame:Update(code)
 
 end)

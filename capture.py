@@ -118,7 +118,7 @@ def endbattle():
     text = pytesseract.image_to_string(Image.open("full.jpg"))
     #print text
     try:
-        if text.find("END") >= 0:
+        if text.find("MMO") >= 0:
             return True
     except:
         return False
