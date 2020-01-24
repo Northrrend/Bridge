@@ -69,6 +69,7 @@ if __name__=='__main__':
                     print dt_ms + 'battle end'
                     warrior.quit_bf()
                     time.sleep(Reload_WaitingTime)
+                    warrior.donate()
                     break
                 t = t + r
                 print 'Defence end in ' + str(BF_WinningTime - t) + ' s...'

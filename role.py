@@ -13,11 +13,12 @@ class Role(object):
         self.NPCKey = '.'
         self.MountKey1 = 'g'
         self.AntiAFKKey = '6'
-        self.NPCKey2 = ''
+        self.TargetKey2 = '\''
 
     def join_bfqueue(self):
         #This is used to prevent bad guy to summon you
         self._left_click('StaticPopup1Button2')
+        time.sleep(0.2)
         self.k.tap_key(self.TargetKey)
         time.sleep(0.2)
         self.k.tap_key(self.NPCKey)
@@ -99,7 +100,20 @@ class Role(object):
         return 52
 
     def donate(self):
-        pass
+        self.k.tap_key(self.TargetKey2)
+        time.sleep(0.2)
+        self.k.tap_key(self.NPCKey)
+        time.sleep(0.5)
+        self._left_click('GossipTitleButton1')
+        time.sleep(0.5)
+        self._left_click('QuestFrameCompleteButton')
+        time.sleep(0.5)
+        self._left_click('QuestFrameCompleteQuestButton')
+        time.sleep(0.5)
+        self._left_click('GossipFrameGreetingGoodbyeButton')
+        time.sleep(0.5)
+        self._left_click('GossipFrameGreetingGoodbyeButton')
+        time.sleep(0.1)
 
     def gtalk(self):
         self.k.tap_key(self.k.enter_key)
@@ -149,7 +163,6 @@ class Role(object):
         return i
     
     def _left_click(self, s):
-        # total time 0.5
         self.k.tap_key(self.k.enter_key)
         time.sleep(0.1)
         self.k.type_string('/click')
@@ -162,7 +175,6 @@ class Role(object):
         time.sleep(0.1)
 
     def _right_click(self, s):
-        #total time 0.7
         self.k.tap_key(self.k.enter_key)
         time.sleep(0.1)
         self.k.type_string('/click')
