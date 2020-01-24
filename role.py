@@ -13,6 +13,7 @@ class Role(object):
         self.NPCKey = '.'
         self.MountKey1 = 'g'
         self.AntiAFKKey = '6'
+        self.NPCKey2 = ''
 
     def join_bfqueue(self):
         #This is used to prevent bad guy to summon you
@@ -99,6 +100,18 @@ class Role(object):
 
     def donate(self):
         pass
+
+    def gtalk(self):
+        self.k.tap_key(self.k.enter_key)
+        time.sleep(0.1)
+        self.k.type_string('/g')
+        time.sleep(0.1)
+        self.k.tap_key(self.k.space_key)
+        time.sleep(0.1)
+        self.k.type_string('There stands the iron armor!!!')
+        time.sleep(0.1)
+        self.k.tap_key(self.k.enter_key)
+        time.sleep(0.1)
 
     def test_action(self):
         filename = 'to_gate.txt'

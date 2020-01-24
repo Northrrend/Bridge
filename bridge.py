@@ -43,6 +43,7 @@ if __name__=='__main__':
     #account.login()
     time.sleep(2)
     warrior = Role()
+    warrior.gtalk()
     #warrior.change_chatframe()
     dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
     print dt_ms + 'Wait 1 seconds to start script'

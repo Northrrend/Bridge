@@ -36,3 +36,6 @@ capture._window_capture3("hahaha.jpg")
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
 text = pytesseract.image_to_string(Image.open("hahaha.jpg"))
 print text
+
+warrior = Role()
+warrior.donate()
