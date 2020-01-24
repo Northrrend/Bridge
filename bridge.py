@@ -4,21 +4,19 @@ import datetime
 from multiprocessing import Process
 from multiprocessing import Pool
 import pymouse,pykeyboard,os,sys
-from pymouse import *
-from pykeyboard import PyKeyboard
 import random
-from capture import *
 from role import Role
 import account
+from capture import *
 
 
 BF_WaitingTime = 5
 BF_PrepareTime = 110
-Logout_WaitingTime = 5
-Login_WaitingTime = 10
-AFK_WaitingTime = 10
+#Logout_WaitingTime = 5
+#Login_WaitingTime = 10
+#AFK_WaitingTime = 10
 BF_WinningTime = 60*40
-Reload_WaitingTime = 5
+Reload_WaitingTime = 7
 Escape_WaitingTime = 60*15
 
 virtual = 1
@@ -41,10 +39,8 @@ if __name__=='__main__':
             exit(-1)
 
     #account.login()
-    time.sleep(2)
     warrior = Role()
     warrior.gtalk()
-    #warrior.change_chatframe()
     dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
     print dt_ms + 'Wait 1 seconds to start script'
     time.sleep(1)
