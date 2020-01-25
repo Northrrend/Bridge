@@ -69,6 +69,8 @@ if __name__=='__main__':
                     print dt_ms + 'battle end'
                     warrior.quit_bf()
                     time.sleep(Reload_WaitingTime)
+                    #for virtual machine
+                    time.sleep(Reload_WaitingTime)
                     warrior.donate()
                     break
                 t = t + r
