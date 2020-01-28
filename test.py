@@ -32,10 +32,9 @@ if not capture.activate_wow_window():
         print('Locate wow window failed exit')
         exit(-1)
 time.sleep(2)
-capture._window_capture3("hahaha.jpg")
+capture._window_capture("hahaha.jpg")
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
 text = pytesseract.image_to_string(Image.open("hahaha.jpg"))
 print text
 
-warrior = Role()
-warrior.donate()
+

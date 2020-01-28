@@ -19,7 +19,7 @@ BF_WinningTime = 60*40
 Reload_WaitingTime = 7
 Escape_WaitingTime = 60*15
 
-virtual = 1
+virtual = 0
 SCREEN_SCALE = 1.25
 SCREEN_W = 1920
 SCREEN_H = 1080

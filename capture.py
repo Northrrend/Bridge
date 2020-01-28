@@ -43,13 +43,12 @@ def _window_capture(filename):
     mfcDC = win32ui.CreateDCFromHandle(hwndDC)
     saveDC = mfcDC.CreateCompatibleDC()
     saveBitMap = win32ui.CreateBitmap()
-    x1 = -(GAME_W*55/1960)
-    y1 = -(GAME_H*664/1080)
-    x2 = GAME_W*634/1960
-    y2 = GAME_H*839/1080
+    x1 = -30
+    y1 = -30
+    x2 = 300
+    y2 = 403
     w = x1 + x2
-    h = (y1 + y2)/6
-    y1 = -(y2 - h)
+    h = y1 + y2
     saveBitMap.CreateCompatibleBitmap(mfcDC, int(w), int(h))
     saveDC.SelectObject(saveBitMap)
     saveDC.BitBlt((int(x1), int(y1)), (int(x2), int(y2)), mfcDC, (0, 0), win32con.SRCCOPY)
@@ -94,7 +93,10 @@ def _snap_handle(filename, filename2):
 
 def newbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-    _window_capture3("full.jpg")
+    if virtual == 1:
+        _window_capture3("full.jpg")
+    else:
+        _window_capture("full.jpg")
     text = pytesseract.image_to_string(Image.open("full.jpg"))
     try:
         #print text
@@ -114,7 +116,10 @@ def newbattle():
 
 def endbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-    _window_capture3("full.jpg")
+    if virtual == 1:
+        _window_capture3("full.jpg")
+    else:
+        _window_capture("full.jpg")
     text = pytesseract.image_to_string(Image.open("full.jpg"))
     #print text
     try:
