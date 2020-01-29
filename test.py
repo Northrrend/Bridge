@@ -19,14 +19,19 @@ from role import Role
 import capture
 from capture import *
 
-time.sleep(2)
 
-virtual = 1
+p = os.popen('Systeminfo | findstr /i "System Model"')
+t = p.read()
+if t.find('VMware') > 0 :
+    print 'vm'
+else:
+    print 'baremental'
+        
 
 if not init_wow_window_pos():
         print('Locate wow window failed exit')
         exit(-1)
 time.sleep(2)
-dashboard()
+
 
 
