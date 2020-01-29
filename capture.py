@@ -31,34 +31,7 @@ def init_wow_window_pos():
         win32gui.SetForegroundWindow(handle)
         return True
 
-def activate_wow_window():
-    handle = win32gui.FindWindow("GxWindowClass", None)
-    print "WOW window id = %s" % handle
-    if handle == 0:
-        print "Can not find Wow window!"
-        return False
-    else:
-        win32gui.SetForegroundWindow(handle)
-        return True
-
 def _window_capture(filename):
-    hwnd = 0
-    hwndDC = win32gui.GetWindowDC(hwnd)
-    mfcDC = win32ui.CreateDCFromHandle(hwndDC)
-    saveDC = mfcDC.CreateCompatibleDC()
-    saveBitMap = win32ui.CreateBitmap()
-    x1 = -30
-    y1 = -30
-    x2 = 300
-    y2 = 403
-    w = x1 + x2
-    h = y1 + y2
-    saveBitMap.CreateCompatibleBitmap(mfcDC, int(w), int(h))
-    saveDC.SelectObject(saveBitMap)
-    saveDC.BitBlt((int(x1), int(y1)), (int(x2), int(y2)), mfcDC, (0, 0), win32con.SRCCOPY)
-    saveBitMap.SaveBitmapFile(saveDC, filename)
-
-def _window_capture3(filename):
     hwnd = 0
     hwndDC = win32gui.GetWindowDC(hwnd)
     mfcDC = win32ui.CreateDCFromHandle(hwndDC)
@@ -98,48 +71,9 @@ def _snap_handle(filename, filename2):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     cv2.imwrite(filename2, gray)
 
-def newbattle():
+def dashboard(code_list):
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-    if VIRTUAL == 1:
-        _window_capture3("full.jpg")
-    else:
-        _window_capture("full.jpg")
-    text = pytesseract.image_to_string(Image.open("full.jpg"))
-    try:
-        #print text
-        if text.find("OLD") >= 0:
-            return False
-        elif text.find("SEMI") >= 0:
-            return True
-        elif text.find("BTO") >= 0:
-            return True
-        else:
-            return False
-    except UnicodeEncodeError:
-        #k = PyKeyboard()
-        #k.tap_key(k.enter_key)
-        #account.login()
-        return False
-
-def endbattle():
-    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-    if VIRTUAL == 1:
-        _window_capture3("full.jpg")
-    else:
-        _window_capture("full.jpg")
-    text = pytesseract.image_to_string(Image.open("full.jpg"))
-    #print text
-    try:
-        if text.find("MMO") >= 0:
-            return True
-    except:
-        return False
-    return False
-
-def dashboard():
-    code_list = ["MMO","OLD","BTO","SEMI","MPP"]
-    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-    _window_capture3("full.jpg")
+    _window_capture("full.jpg")
     _snap_handle("full.jpg", "gray.jpg")
     text = pytesseract.image_to_string(Image.open("gray.jpg"))
     print "DASHBOARD == " + text + " =="

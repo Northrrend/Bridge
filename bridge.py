@@ -15,7 +15,7 @@ BF_PrepareTime = 110
 BF_WinningTime = 60*40
 Reload_WaitingTime = 7
 Escape_WaitingTime = 60*15
-
+code_list = ["MMO","OLD","BTO","SEMI","MPP"]
 
 if __name__=='__main__':
 
@@ -33,7 +33,7 @@ if __name__=='__main__':
     while True:
         warrior.join_bfqueue()
         time.sleep(BF_WaitingTime)
-        code = dashboard()
+        code = dashboard(code_list)
         if (code == "BTO") | (code == "SEMI"):
             dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
             print dt_ms + 'new battlefield enter now'
@@ -51,7 +51,7 @@ if __name__=='__main__':
                 warrior.anti_afk()
                 r = 30
                 time.sleep(r)
-                code = dashboard()
+                code = dashboard(code_list)
                 if code == "MMO":
                     dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
                     print dt_ms + 'battle end'
