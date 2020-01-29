@@ -15,7 +15,7 @@ BF_PrepareTime = 110
 BF_WinningTime = 60*40
 Reload_WaitingTime = 7
 Escape_WaitingTime = 60*15
-code_list = ["MMO","OLD","BTO","SEMI","MPP"]
+code_list = ["MMO","OLD","BTO","SEMI","MPP","TKB"]
 
 if __name__=='__main__':
 
@@ -49,7 +49,7 @@ if __name__=='__main__':
                 r = 30
                 time.sleep(r)
                 code = eye.dashboard(code_list)
-                if code == "MMO":
+                if code == "TKB":
                     dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
                     print dt_ms + 'battle end'
                     warrior.quit_bf()
