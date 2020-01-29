@@ -19,24 +19,12 @@ BF_WinningTime = 60*40
 Reload_WaitingTime = 7
 Escape_WaitingTime = 60*15
 
-virtual = 0
-SCREEN_SCALE = 1.25
-SCREEN_W = 1920
-SCREEN_H = 1080
-GAME_SCALE = 0.8
-GAME_W = SCREEN_W*GAME_SCALE
-GAME_H = SCREEN_H*GAME_SCALE
 
 if __name__=='__main__':
 
-    if virtual == 1:
-        if not activate_wow_window():
-            print('Locate wow window failed exit')
-            exit(-1)
-    else:
-        if not init_wow_window_pos(GAME_W, GAME_H, SCREEN_SCALE):
-            print('Locate wow window failed exit')
-            exit(-1)
+    if not init_wow_window_pos():
+        print('Locate wow window failed exit')
+        exit(-1)
 
     #account.login()
     warrior = Role()

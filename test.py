@@ -17,24 +17,16 @@ import account
 import KeymouseGo
 from role import Role
 import capture
+from capture import *
 
 time.sleep(2)
 
 virtual = 1
-SCREEN_SCALE = 1.25
-SCREEN_W = 1960
-SCREEN_H = 1080
-GAME_SCALE = 0.8
-GAME_W = SCREEN_W*GAME_SCALE
-GAME_H = SCREEN_H*GAME_SCALE
 
-if not capture.activate_wow_window():
+if not init_wow_window_pos():
         print('Locate wow window failed exit')
         exit(-1)
 time.sleep(2)
-capture._window_capture("hahaha.jpg")
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-text = pytesseract.image_to_string(Image.open("hahaha.jpg"))
-print text
+dashboard()
 
 

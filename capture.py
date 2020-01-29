@@ -4,26 +4,30 @@ import pytesseract
 import cv2
 from PIL import Image
 
-virtual = 1
+VIRTUAL = 1
 SCREEN_SCALE = 1.25
 SCREEN_W = 1920
 SCREEN_H = 1080
-GAME_SCALE = 0.8
+GAME_SCALE = 0.6
 GAME_W = SCREEN_W*GAME_SCALE
 GAME_H = SCREEN_H*GAME_SCALE
 
-def _to_real_pos(pos, scale):
+def _to_real_pos(pos):
+    scale = SCREEN_SCALE
     return int(float(pos) / scale)
 
-def init_wow_window_pos(w, h, scale):
+def init_wow_window_pos():
+    w = GAME_W
+    h = GAME_H
     handle = win32gui.FindWindow("GxWindowClass", None)
     print "WOW window id = %s" % handle
     if handle == 0:
         print "Can not find Wow window!"
         return False
     else:
-        win32gui.SetForegroundWindow(handle)
-        win32gui.MoveWindow(handle, _to_real_pos(0, scale), _to_real_pos(0, scale), _to_real_pos(w, scale), _to_real_pos(h, scale), True)
+        if VIRTUAL == 0:
+            win32gui.SetForegroundWindow(handle)
+            win32gui.MoveWindow(handle, _to_real_pos(0), _to_real_pos(0), _to_real_pos(w), _to_real_pos(h), True)
         win32gui.SetForegroundWindow(handle)
         return True
 
@@ -60,13 +64,16 @@ def _window_capture3(filename):
     mfcDC = win32ui.CreateDCFromHandle(hwndDC)
     saveDC = mfcDC.CreateCompatibleDC()
     saveBitMap = win32ui.CreateBitmap()
-    x1 = 0
-    y1 = 0
-    x2 = 200
-    y2 = 30
-    if virtual == 0 :
-        x2 = x2 * SCREEN_SCALE
-        y2 = y2 * SCREEN_SCALE
+    if VIRTUAL == 1:
+        x1 = 0
+        y1 = 0
+        x2 = 200
+        y2 = 30
+    if VIRTUAL == 0 :
+        x1 = -9
+        y1 = -38
+        x2 = 200/SCREEN_SCALE
+        y2 = 30/SCREEN_SCALE - y1
     w = x1 + x2
     h = y1 + y2
     saveBitMap.CreateCompatibleBitmap(mfcDC, int(w), int(h))
@@ -93,7 +100,7 @@ def _snap_handle(filename, filename2):
 
 def newbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-    if virtual == 1:
+    if VIRTUAL == 1:
         _window_capture3("full.jpg")
     else:
         _window_capture("full.jpg")
@@ -116,7 +123,7 @@ def newbattle():
 
 def endbattle():
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-    if virtual == 1:
+    if VIRTUAL == 1:
         _window_capture3("full.jpg")
     else:
         _window_capture("full.jpg")
@@ -128,3 +135,17 @@ def endbattle():
     except:
         return False
     return False
+
+def dashboard():
+    code_list = ["MMO","OLD","BTO","SEMI","MPP"]
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
+    _window_capture3("full.jpg")
+    text = pytesseract.image_to_string(Image.open("full.jpg"))
+    print "DASHBOARD == " + text + " =="
+    try:
+        for code in code_list:
+            if text.find(code) >= 0:
+                return code
+    except:
+        return "NULL"
+    return "NULL"
