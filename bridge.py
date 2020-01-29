@@ -36,7 +36,8 @@ if __name__=='__main__':
     while True:
         warrior.join_bfqueue()
         time.sleep(BF_WaitingTime)
-        if newbattle():
+        code = dashboard()
+        if (code == "BTO") | (code == "SEMI"):
             dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
             print dt_ms + 'new battlefield enter now'
             warrior.enter_bf2()
@@ -49,10 +50,12 @@ if __name__=='__main__':
             dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
             print dt_ms + 'start defence'
             while t < BF_WinningTime :
+                print 'Defence end in ' + str(BF_WinningTime - t) + ' s...'
                 warrior.anti_afk()
                 r = 30
                 time.sleep(r)
-                if endbattle():
+                code = dashboard()
+                if code == "MMO":
                     dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
                     print dt_ms + 'battle end'
                     warrior.quit_bf()
@@ -61,8 +64,9 @@ if __name__=='__main__':
                     time.sleep(Reload_WaitingTime)
                     warrior.donate()
                     break
+                if code == "MPP":
+                    t = BF_WinningTime
                 t = t + r
-                print 'Defence end in ' + str(BF_WinningTime - t) + ' s...'
             if t >= BF_WinningTime :
                 warrior.quit_bf_afk()
                 time.sleep(Escape_WaitingTime)
