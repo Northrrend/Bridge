@@ -14,29 +14,54 @@ class Role(object):
         self.MountKey1 = 'g'
         self.AntiAFKKey = '6'
         self.TargetKey2 = '\''
+    
+    def _left_click(self, s):
+        self.k.tap_key(self.k.enter_key)
+        time.sleep(0.3)
+        self.k.type_string('/click')
+        time.sleep(0.1)
+        self.k.tap_key(self.k.space_key)
+        time.sleep(0.1)
+        self.k.type_string(s)
+        time.sleep(0.1)
+        self.k.tap_key(self.k.enter_key)
+        time.sleep(0.1)
+
+    def _right_click(self, s):
+        self.k.tap_key(self.k.enter_key)
+        time.sleep(0.3)
+        self.k.type_string('/click')
+        time.sleep(0.1)
+        self.k.tap_key(self.k.space_key)
+        time.sleep(0.1)
+        self.k.type_string(s)
+        time.sleep(0.1)
+        self.k.tap_key(self.k.space_key)
+        time.sleep(0.1)
+        self.k.type_string('RightButton')
+        time.sleep(0.1)
+        self.k.tap_key(self.k.enter_key)
+        time.sleep(0.1)
 
     def join_bfqueue(self):
         #This is used to prevent bad guy to summon you
         self._left_click('StaticPopup1Button2')
-        time.sleep(0.2)
         self.k.tap_key(self.TargetKey)
-        time.sleep(0.2)
+        time.sleep(0.3)
         self.k.tap_key(self.NPCKey)
-        time.sleep(0.5)
+        time.sleep(0.3)
         self._left_click('GossipTitleButton1')
-        time.sleep(0.5)
+        time.sleep(0.3)
         self._left_click('BattlefieldFrameJoinButton')
         time.sleep(0.1)
 
     def leave_bfqueue(self):
         self._right_click('MiniMapBattlefieldFrame')
         self._left_click('DropDownList1Button3')
-    
-    def enter_bf(self):
-        self._left_click('StaticPopup1Button1')
 
-    def enter_bf2(self):
+    def enter_bf(self):
         self._right_click('MiniMapBattlefieldFrame')
+        time.sleep(0.3)
         self._left_click('DropDownList1Button2')
 
     def quit_bf(self):
@@ -44,7 +69,7 @@ class Role(object):
     
     def quit_bf2(self):
         self._left_click('WorldStateScoreFrameLeaveButton')
-        time.sleep(5)
+        time.sleep(0.3)
         self._left_click('StaticPopup1Button1')
     
     def quit_bf_afk(self):
@@ -76,12 +101,9 @@ class Role(object):
 
     def anti_afk(self):
         self.k.tap_key(self.AntiAFKKey)
-        time.sleep(0.1)
-        return 0.1
     
     def all_a(self):
         self._left_click('RaidFrameAllAssistCheckButton')
-        return 0.5
     
     def to_bridge(self):
         self.march(2)
@@ -101,17 +123,17 @@ class Role(object):
 
     def donate(self):
         self.k.tap_key(self.TargetKey2)
-        time.sleep(0.2)
+        time.sleep(0.3)
         self.k.tap_key(self.NPCKey)
-        time.sleep(0.5)
+        time.sleep(0.3)
         self._left_click('GossipTitleButton1')
-        time.sleep(0.5)
+        time.sleep(0.3)
         self._left_click('QuestFrameCompleteButton')
-        time.sleep(0.5)
+        time.sleep(0.3)
         self._left_click('QuestFrameCompleteQuestButton')
-        time.sleep(0.5)
+        time.sleep(0.3)
         self._left_click('GossipFrameGreetingGoodbyeButton')
-        time.sleep(0.5)
+        time.sleep(0.3)
         self._left_click('GossipFrameGreetingGoodbyeButton')
         time.sleep(0.1)
 
@@ -161,31 +183,3 @@ class Role(object):
         self.k.tap_key(self.k.enter_key)
         time.sleep(10)
         return i
-    
-    def _left_click(self, s):
-        self.k.tap_key(self.k.enter_key)
-        time.sleep(0.1)
-        self.k.type_string('/click')
-        time.sleep(0.1)
-        self.k.tap_key(self.k.space_key)
-        time.sleep(0.1)
-        self.k.type_string(s)
-        time.sleep(0.1)
-        self.k.tap_key(self.k.enter_key)
-        time.sleep(0.1)
-
-    def _right_click(self, s):
-        self.k.tap_key(self.k.enter_key)
-        time.sleep(0.1)
-        self.k.type_string('/click')
-        time.sleep(0.1)
-        self.k.tap_key(self.k.space_key)
-        time.sleep(0.1)
-        self.k.type_string(s)
-        time.sleep(0.1)
-        self.k.tap_key(self.k.space_key)
-        time.sleep(0.1)
-        self.k.type_string('RightButton')
-        time.sleep(0.1)
-        self.k.tap_key(self.k.enter_key)
-        time.sleep(0.1)

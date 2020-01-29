@@ -37,7 +37,7 @@ if __name__=='__main__':
         if (code == "BTO") | (code == "SEMI"):
             dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
             print dt_ms + 'new battlefield enter now'
-            warrior.enter_bf2()
+            warrior.enter_bf()
             time.sleep(Reload_WaitingTime)
             warrior.all_a()
             warrior.jump(BF_PrepareTime)
