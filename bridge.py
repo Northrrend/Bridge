@@ -19,10 +19,7 @@ code_list = ["MMO","OLD","BTO","SEMI","MPP"]
 
 if __name__=='__main__':
 
-    if not init_wow_window_pos():
-        print('Locate wow window failed exit')
-        exit(-1)
-
+    eye = Eye()
     #account.login()
     warrior = Role()
     warrior.gtalk()
@@ -33,7 +30,7 @@ if __name__=='__main__':
     while True:
         warrior.join_bfqueue()
         time.sleep(BF_WaitingTime)
-        code = dashboard(code_list)
+        code = eye.dashboard(code_list)
         if (code == "BTO") | (code == "SEMI"):
             dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
             print dt_ms + 'new battlefield enter now'
@@ -51,7 +48,7 @@ if __name__=='__main__':
                 warrior.anti_afk()
                 r = 30
                 time.sleep(r)
-                code = dashboard(code_list)
+                code = eye.dashboard(code_list)
                 if code == "MMO":
                     dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
                     print dt_ms + 'battle end'
