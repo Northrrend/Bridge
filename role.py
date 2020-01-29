@@ -59,8 +59,8 @@ class Role(object):
         self.k.press_key(self.k.alt_key)
         self.k.tap_key(self.MountKey1)
         self.k.release_key(self.k.alt_key)
-        time.sleep(3.1)
-        return 3.1
+        time.sleep(4)
+        return 4
     
     def jump(self, t):
         c = 0

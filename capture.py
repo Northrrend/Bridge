@@ -8,7 +8,7 @@ VIRTUAL = 1
 SCREEN_SCALE = 1.25
 SCREEN_W = 1920
 SCREEN_H = 1080
-GAME_SCALE = 0.6
+GAME_SCALE = 0.8
 GAME_W = SCREEN_W*GAME_SCALE
 GAME_H = SCREEN_H*GAME_SCALE
 
@@ -71,7 +71,7 @@ def _window_capture3(filename):
         y2 = 30
     if VIRTUAL == 0 :
         x1 = -9
-        y1 = -38
+        y1 = -40
         x2 = 200/SCREEN_SCALE
         y2 = 30/SCREEN_SCALE - y1
     w = x1 + x2
@@ -140,7 +140,8 @@ def dashboard():
     code_list = ["MMO","OLD","BTO","SEMI","MPP"]
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
     _window_capture3("full.jpg")
-    text = pytesseract.image_to_string(Image.open("full.jpg"))
+    _snap_handle("full.jpg", "gray.jpg")
+    text = pytesseract.image_to_string(Image.open("gray.jpg"))
     print "DASHBOARD == " + text + " =="
     try:
         for code in code_list:

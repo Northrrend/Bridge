@@ -12,9 +12,6 @@ from capture import *
 
 BF_WaitingTime = 5
 BF_PrepareTime = 110
-#Logout_WaitingTime = 5
-#Login_WaitingTime = 10
-#AFK_WaitingTime = 10
 BF_WinningTime = 60*40
 Reload_WaitingTime = 7
 Escape_WaitingTime = 60*15
