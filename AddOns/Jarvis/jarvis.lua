@@ -275,6 +275,7 @@ RegEvent("ADDON_LOADED", function()
             joinqueuebtn:SetAllPoints(self.button1)
 
             joinqueuebtn:Show()
+            statusFrame:Update("BTO")
         end
 
         if replaceHide then
@@ -349,7 +350,10 @@ statusFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 --statusFrame:RegisterEvent("BAG_UPDATE")
 
 statusFrame:SetScript("OnEvent", function(self,event,...)
-	statusFrame:UpdateVisibility()
+    statusFrame:UpdateVisibility()
+    if not statusFrame:IsShown() then return end
+	local code = "SYSTEM ONLINE ..."
+	statusFrame:Update(code)
 end)
 
 
@@ -366,3 +370,18 @@ statusFrame:UpdateVisibility()
 end)
 
 ----------------------------------------
+jarvisModel:AddReg("BATTLEFIELD_MGR_ENTRY_INVITE",function(...)
+    statusFrame:UpdateVisibility()
+        if not statusFrame:IsShown() then return end
+        local code = "AAA"
+        statusFrame:Update(code)
+    
+    end)
+
+jarvisModel:AddReg("GM_PLAYER_INFO",function(...)
+    statusFrame:UpdateVisibility()
+        if not statusFrame:IsShown() then return end
+        local code = "BBB"
+        statusFrame:Update(code)
+    
+    end)

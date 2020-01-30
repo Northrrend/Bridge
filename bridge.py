@@ -29,9 +29,11 @@ if __name__=='__main__':
 
     while True:
         warrior.join_bfqueue()
-        time.sleep(BF_WaitingTime)
-        code = eye.dashboard(code_list)
-        if (code == "BTO") | (code == "SEMI"):
+        code = 'NULL'
+        while code <> 'BTO':
+            time.sleep(15)
+            code = eye.dashboard(code_list)
+        if True:
             dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
             print dt_ms + 'new battlefield enter now'
             warrior.enter_bf()
