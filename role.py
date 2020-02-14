@@ -16,6 +16,11 @@ class Role(object):
         self.TargetKey2 = '\''
         self.index = 0
     
+    def reload(self):
+        self.k.type_string('/reload')
+        self.k.tap_key(self.k.enter_key)
+        time.sleep(0.1)
+
     def _left_click(self, s):
         self.k.tap_key(self.k.enter_key)
         time.sleep(0.3)
@@ -163,13 +168,13 @@ class Role(object):
         time.sleep(0.1)
     
     def ready(self):
-        self.ptalk('ready')
+        self.ptalk('MPP')
     
     def report_new(self):
-        self.ptalk('new')
+        self.ptalk('MPO')
 
     def report_old(self):
-        self.ptalk('old')
+        self.ptalk('OLD')
 
     def test_action(self):
         filename = 'to_gate.txt'

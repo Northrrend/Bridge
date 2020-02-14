@@ -278,10 +278,12 @@ statusFrame:UpdateVisibility()
 	local code = "UPDATE"
     local bftime = GetBattlefieldInstanceRunTime()
     if (bftime > 0) and (bftime < 180000) then
-        SendChatMessage("MPO", "party")
+        SendChatMessage("MMO", "party")
+        code = "MMO"
     end
     if bftime >= 180000 then
         SendChatMessage("OLD", "party")
+        code = "OLD"
     end
 	statusFrame:Update(code)
 

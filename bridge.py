@@ -15,7 +15,12 @@ BF_PrepareTime = 110
 BF_WinningTime = 60*40
 Reload_WaitingTime = 7
 Escape_WaitingTime = 60*15
-code_list = ["MMO","OLD","BTO","SEMI","MPP","TKB"]
+code_list = ["MMO","OLD","BTO","MPP","TKB"]
+#MMO ... new BF
+#OLD ... old BF
+#BTO ... BF pop up
+#MPP ... slave ready
+#TKB ... BF end
 
 def classic():
     while True:
@@ -60,12 +65,17 @@ def classic():
 
 def master():
     while True:
-        warrior.join_bfqueue()
         code = 'NULL'
-        while code <> 'BTO':
-            time.sleep(15)
+        while code <> 'MPP':
+            time.sleep(5)
             code = eye.dashboard(code_list)
-        if True:
+        warrior.join_bfqueue()
+        while code <> 'BTO':
+            time.sleep(5)
+            code = eye.dashboard(code_list)
+        time.sleep(20)
+        code = eye.dashboard(code_list)
+        if code == 'MMO':
             dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
             print dt_ms + 'new battlefield enter now'
             warrior.enter_bf()
@@ -92,8 +102,6 @@ def master():
                     time.sleep(Reload_WaitingTime)
                     warrior.donate()
                     break
-                if code == "MPP":
-                    t = BF_WinningTime
                 t = t + r
             if t >= BF_WinningTime :
                 warrior.quit_bf_afk()
@@ -106,8 +114,8 @@ def master():
 
 def slave():
     code = 'NULL'
-    warrior.ready()
     while True:
+        warrior.ready()
         while code <> 'BTO':
             time.sleep(15)
             code = eye.dashboard(code_list)
@@ -115,9 +123,10 @@ def slave():
         print dt_ms + 'new battlefield enter now'
         warrior.enter_bf()
         time.sleep(Reload_WaitingTime)
+        warrior.reload()
+        time.sleep(Reload_WaitingTime)
         code = eye.dashboard(code_list)
-        if code == 'NEW':
-            warrior.report_new()
+        if code == 'MMO':
             warrior.jump(BF_PrepareTime)
             dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
             print dt_ms + 'march to bridges'
@@ -135,22 +144,15 @@ def slave():
                     print dt_ms + 'battle end'
                     warrior.quit_bf()
                     time.sleep(Reload_WaitingTime)
-                    #for virtual machine
-                    time.sleep(Reload_WaitingTime)
                     warrior.donate()
                     break
-                if code == "MPP":
-                    t = BF_WinningTime
                 t = t + r
             if t >= BF_WinningTime :
                 warrior.quit_bf_afk()
-                warrior.change_role()
-                warrior.ready()
+                time.sleep(Escape_WaitingTime)
         else:
-            warrior.report_old() 
             warrior.quit_bf_afk()
             warrior.change_role()
-            warrior.ready()
 
 def ws():
     while True:
@@ -186,7 +188,7 @@ if __name__=='__main__':
     #3: solo
     #4: jump
     #5: ws
-    role = 3
+    role = 4
 
     if role == 1:
         eye = Eye()
