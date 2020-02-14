@@ -66,7 +66,7 @@ def classic():
 def master():
     while True:
         code = 'NULL'
-        while code <> 'MPP':
+        while code <> 'MPO':
             time.sleep(5)
             code = eye.dashboard(code_list)
         warrior.join_bfqueue_group()
@@ -115,8 +115,8 @@ def master():
 def slave():
     code = 'NULL'
     while True:
-        warrior.ready()
         while code <> 'BTO':
+            warrior.ready()
             time.sleep(15)
             code = eye.dashboard(code_list)
         dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
