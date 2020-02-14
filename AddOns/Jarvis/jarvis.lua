@@ -246,16 +246,20 @@ statusFrame:RegisterEvent("ZONE_CHANGED")
 statusFrame:RegisterEvent("ZONE_CHANGED_INDOORS")
 statusFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 statusFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+statusFrame:RegisterEvent("CHAT_MSG_PARTY")
 --statusFrame:RegisterEvent("BAG_UPDATE")
 
 statusFrame:SetScript("OnEvent", function(self,event,...)
     statusFrame:UpdateVisibility()
     if not statusFrame:IsShown() then return end
     local code = "SYSTEM ONLINE ..."
+    if event == "CHAT_MSG_PARTY" then 
+        code = select(1, ...);
+    end
 	statusFrame:Update(code)
 end)
 
-
+--SecondsToTime(GetBattlefieldInstanceRunTime()/1000)
 
 ----------------------------------------
 -- 经验值改变时计算并更新状态框
@@ -268,13 +272,28 @@ statusFrame:UpdateVisibility()
 
 end)
 
+jarvisModel:AddReg("UPDATE_ACTIVE_BATTLEFIELD",function(...)
+statusFrame:UpdateVisibility()
+	if not statusFrame:IsShown() then return end
+	local code = "UPDATE"
+    local bftime = GetBattlefieldInstanceRunTime()
+    if (bftime > 0) and (bftime < 180000) then
+        SendChatMessage("MPO", "party")
+    end
+    if bftime >= 180000 then
+        SendChatMessage("OLD", "party")
+    end
+	statusFrame:Update(code)
 
-jarvisModel:AddReg("CHAT_MSG_PARTY",function(...)
-    --print msg
-    statusFrame:UpdateVisibility()
+end)
+
+
+jarvisModel:AddReg("CHAT_MSG_SAY",function(...)
+   statusFrame:UpdateVisibility()
         if not statusFrame:IsShown() then return end
+        local msg = select(1, ...)
         local code = "ABC"
-        statusFrame:Update(code)
+--            statusFrame:Update(code)
     
     end)
 ----------------------------------------

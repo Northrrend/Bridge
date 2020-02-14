@@ -22,6 +22,10 @@ f:SetScript("OnEvent", function(self, event, ...)
         end
     end
 
+--    if event == "CHAT_MSG_PARTY" then
+--        local msg = select(1, ...);
+--    end
+
     local cbs = m[event]
     if cbs then
         for _, cb in pairs(cbs) do
