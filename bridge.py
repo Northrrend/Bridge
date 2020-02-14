@@ -15,11 +15,11 @@ BF_PrepareTime = 110
 BF_WinningTime = 60*40
 Reload_WaitingTime = 7
 Escape_WaitingTime = 60*15
-code_list = ["MMO","OLD","BTO","MPP","TKB"]
+code_list = ["MMO","OLD","BTO","MPO","TKB"]
 #MMO ... new BF
 #OLD ... old BF
 #BTO ... BF pop up
-#MPP ... slave ready
+#MPO ... slave ready
 #TKB ... BF end
 
 def classic():
