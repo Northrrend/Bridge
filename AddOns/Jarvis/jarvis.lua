@@ -77,6 +77,10 @@ RegEvent("BATTLEFIELDS_SHOW", function()
     C_ChatInfo.SendAddonMessage("BATTLEINFO", "ELAPSE_WANTED", "GUILD")
 end)
 
+--RegEvent("CHAT_MSG_PARTY", function(text, playername)
+--    print "sss"
+--end)
+
 RegEvent("CHAT_MSG_ADDON", function(prefix, text, channel, sender)
     if prefix ~= "BATTLEINFO" then
         return
@@ -135,52 +139,13 @@ RegEvent("CHAT_MSG_ADDON", function(prefix, text, channel, sender)
 
 end)
 local battleList = {}
-local function UpdateBattleListCache()
-    local mapName = GetBattlegroundInfo()
-
-    if not mapName then
-        return
-    end
-
-    if not battleList[mapName] then
-        battleList[mapName] = {}
-    end
-    table.wipe(battleList[mapName])
-    
-    local n = GetNumBattlefields()
-    for i = 1, n  do
-        local instanceID = GetBattlefieldInstanceInfo(i)
-        battleList[mapName][tonumber(instanceID)] = { i = i , n = n }
-    end
-
-    --UpdateInstanceButtonText()
-end
 
 local DROP_MENU_LOC_ENTER = 2
 local DROP_MENU_LOC_LEAVE = 1
 
-local function SearchDropMenuLoc(showid, offset)
-    local queued = 0
-
-    for i = 1, MAX_BATTLEFIELD_QUEUES do
-        local status, mapName, instanceID = GetBattlefieldStatus(i)
-        local current = i == showid 
-
-        if current then
-            return i * 4 - offset - queued;
-        end
-
-        if status == "queued" then
-            queued = queued + 1
-        end
-    end    
-end
 
 RegEvent("ADDON_LOADED", function()
     C_ChatInfo.RegisterAddonMessagePrefix("BATTLEINFO")
-
-    hooksecurefunc("JoinBattlefield", UpdateBattleListCache)
-    hooksecurefunc("BattlefieldFrame_Update", UpdateBattleListCache)
 
     local joinqueuebtn
     do
@@ -264,78 +229,12 @@ RegEvent("ADDON_LOADED", function()
             FlashClientIcon()
         end
 
-        local tx = self.text:GetText()
-        if InCombatLockdown() then
-            ADDONSELF.Print(L["Button may not work properly during combat"])
-            return
-        end
-
         if replaceEnter then
             joinqueuebtn.showid = data
             joinqueuebtn:SetAllPoints(self.button1)
 
             joinqueuebtn:Show()
             statusFrame:Update("BTO")
-        end
-
-        if replaceHide then
-            leavequeuebtn.showid = data
-            leavequeuebtn:SetAllPoints(self.button2)
-
-            if not self.button2.batteinfohooked then
-                self.button2:SetScript("OnUpdate", function()
-                    leavequeuebtn.updateMacro()
-
-                    if IsControlKeyDown() then
-                        leavequeuebtn:Show()
-                    else
-                        leavequeuebtn:Hide()
-                    end
-                end)
-                self.button2.batteinfohooked = true
-            end
-        end
-
-        if string.find(tx, L["List Position"], 1, 1) or string.find(tx, L["New"], 1 , 1) then			
-            return
-        end    
-
-        for mapName, instanceIDs in pairs(battleList) do
-            local _, _ ,toJ = string.find(tx, ".+" .. mapName .. " (%d+).+")
-            toJ = tonumber(toJ)
-            if toJ then
-                if instanceIDs[toJ] then
-					
-                    -- first half 0 - rate -> red (0)
-                    -- second half rate - 100% -> red(0) -> yellow (1)
-                    local rate = 0.45
-                    local pos = instanceIDs[toJ].i
-                    local total = instanceIDs[toJ].n
-					local i = total - pos
-					if i > 4 then 
-						statusFrame:Update("OLD")
-					else
-						statusFrame:Update("BTO")
-					end
-                    local pos0 = math.max(pos - total * rate - 1, 0)
-
-                    local color = CreateColor(1.0, math.min(pos0 / (total * (1 - rate)), 1) , 0)
-                    local text = color:WrapTextInColorCode(L["List Position"] .. " " .. string.format("%d/%d", pos, total))
-
-                    local elp = GetElapseFromCache(mapName, toJ)
-                    if elp then
-                        text = RED_FONT_COLOR:WrapTextInColorCode(SecondsToTime(elp))
-                    end
-
-                    self.text:SetText(string.gsub(tx ,toJ , YELLOW_FONT_COLOR:WrapTextInColorCode(toJ) .. "(" .. text .. ")"))
-			else
-				statusFrame:Update("BTO")
-                local text = GREEN_FONT_COLOR:WrapTextInColorCode(L["New"])
-                self.text:SetText(string.gsub(tx ,toJ , YELLOW_FONT_COLOR:WrapTextInColorCode(toJ) .. "(" .. text .. ")"))
-
-                end
-                break
-            end
         end
         
     end
@@ -352,7 +251,7 @@ statusFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 statusFrame:SetScript("OnEvent", function(self,event,...)
     statusFrame:UpdateVisibility()
     if not statusFrame:IsShown() then return end
-	local code = "SYSTEM ONLINE ..."
+    local code = "SYSTEM ONLINE ..."
 	statusFrame:Update(code)
 end)
 
@@ -369,6 +268,15 @@ statusFrame:UpdateVisibility()
 
 end)
 
+
+jarvisModel:AddReg("CHAT_MSG_PARTY",function(...)
+    --print msg
+    statusFrame:UpdateVisibility()
+        if not statusFrame:IsShown() then return end
+        local code = "ABC"
+        statusFrame:Update(code)
+    
+    end)
 ----------------------------------------
 jarvisModel:AddReg("BATTLEFIELD_MGR_ENTRY_INVITE",function(...)
     statusFrame:UpdateVisibility()
