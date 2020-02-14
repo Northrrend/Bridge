@@ -60,6 +60,17 @@ class Role(object):
         time.sleep(0.3)
         self._left_click('BattlefieldFrameJoinButton')
         time.sleep(0.1)
+    
+    def join_bfqueue_group(self):
+        self._left_click('StaticPopup1Button2')
+        self.k.tap_key(self.TargetKey)
+        time.sleep(0.3)
+        self.k.tap_key(self.NPCKey)
+        time.sleep(0.3)
+        self._left_click('GossipTitleButton1')
+        time.sleep(0.3)
+        self._left_click('BattlefieldFrameGroupJoinButton')
+        time.sleep(0.1)
 
     def leave_bfqueue(self):
         self._right_click('MiniMapBattlefieldFrame')

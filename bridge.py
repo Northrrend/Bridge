@@ -69,7 +69,7 @@ def master():
         while code <> 'MPP':
             time.sleep(5)
             code = eye.dashboard(code_list)
-        warrior.join_bfqueue()
+        warrior.join_bfqueue_group()
         while code <> 'BTO':
             time.sleep(5)
             code = eye.dashboard(code_list)
