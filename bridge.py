@@ -181,9 +181,14 @@ def ws():
 
 if __name__=='__main__':
 
-    role = 'master'
+    #1: master
+    #2: slave
+    #3: solo
+    #4: jump
+    #5: ws
+    role = 3
 
-    if role == 'master':
+    if role == 1:
         eye = Eye()
         #account.login()
         warrior = Role()
@@ -192,7 +197,7 @@ if __name__=='__main__':
         print dt_ms + 'Wait 1 seconds to start script'
         time.sleep(1)
         master()
-    if role == 'slave':
+    if role == 2:
         eye = Eye()
         #account.login()
         warrior = Role()
@@ -201,7 +206,7 @@ if __name__=='__main__':
         print dt_ms + 'Wait 1 seconds to start script'
         time.sleep(1)
         slave()
-    if role == 'solo':
+    if role == 3:
         eye = Eye()
         #account.login()
         warrior = Role()
@@ -210,10 +215,15 @@ if __name__=='__main__':
         print dt_ms + 'Wait 1 seconds to start script'
         time.sleep(1)
         classic()
-    if role == 'jump':
+    if role == 4:
         warrior = Role()
         while True:
             warrior.anti_afk()
             time.sleep(30)
-    if role == 'ws':
-        pass
+    if role == 5:
+        warrior = Role()
+        warrior.gtalk()
+        dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
+        print dt_ms + 'Wait 1 seconds to start script'
+        time.sleep(1)
+        ws()
