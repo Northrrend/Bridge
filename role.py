@@ -179,7 +179,7 @@ class Role(object):
         time.sleep(0.1)
     
     def ready(self):
-        self.ptalk('MPP')
+        self.ptalk('MPO')
     
     def report_new(self):
         self.ptalk('MPO')
