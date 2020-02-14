@@ -10,6 +10,7 @@ class Role(object):
     def __init__(self):
         self.k = PyKeyboard()
         self.TargetKey = ','
+        self.WhisperKey = ','
         self.NPCKey = '.'
         self.MountKey1 = 'g'
         self.AntiAFKKey = '6'
@@ -223,4 +224,13 @@ class Role(object):
     
     def ready_check(self):
         self._left_click('ReadyCheckFrameYesButton')
+    
+    def leave_group(self):
+        self._right_click('PlayerFrame')
+        self._left_click('DropDownList1Button11')
 
+    def whisper(self):
+        self.k.tap_key(self.WhisperKey)
+    
+    def confirm_join(self):
+        self._left_click('StaticPopup1Button1')

@@ -247,7 +247,7 @@ statusFrame:RegisterEvent("ZONE_CHANGED_INDOORS")
 statusFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 statusFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 statusFrame:RegisterEvent("CHAT_MSG_PARTY")
---statusFrame:RegisterEvent("BAG_UPDATE")
+statusFrame:RegisterEvent("CHAT_MSG_WHISPER")
 
 statusFrame:SetScript("OnEvent", function(self,event,...)
     statusFrame:UpdateVisibility()
@@ -255,6 +255,13 @@ statusFrame:SetScript("OnEvent", function(self,event,...)
     local code = "SYSTEM ONLINE ..."
     if event == "CHAT_MSG_PARTY" then 
         code = select(1, ...);
+    end
+    if event == "CHAT_MSG_WHISPER" then
+        code1 = select(1, ...);
+        if code1 == "xjq" then
+            player = select(2, ...);
+            InviteUnit(player);
+        end
     end
 	statusFrame:Update(code)
 end)

@@ -152,7 +152,11 @@ def slave():
                 time.sleep(Escape_WaitingTime)
         else:
             warrior.quit_bf_afk()
+            warrior.leave_group()
             warrior.change_role()
+            warrior.whisper()
+            time.sleep(3)
+            warrior.confirm_join()
 
 def ws():
     while True:
