@@ -14,6 +14,7 @@ class Role(object):
         self.MountKey1 = 'g'
         self.AntiAFKKey = '6'
         self.TargetKey2 = '\''
+        self.index = 0
     
     def _left_click(self, s):
         self.k.tap_key(self.k.enter_key)
@@ -148,6 +149,27 @@ class Role(object):
         time.sleep(0.1)
         self.k.tap_key(self.k.enter_key)
         time.sleep(0.1)
+    
+    def ptalk(self, s):
+        self.k.tap_key(self.k.enter_key)
+        time.sleep(0.1)
+        self.k.type_string('/p')
+        time.sleep(0.1)
+        self.k.tap_key(self.k.space_key)
+        time.sleep(0.1)
+        self.k.type_string(s)
+        time.sleep(0.1)
+        self.k.tap_key(self.k.enter_key)
+        time.sleep(0.1)
+    
+    def ready(self):
+        self.ptalk('ready')
+    
+    def report_new(self):
+        self.ptalk('new')
+
+    def report_old(self):
+        self.ptalk('old')
 
     def test_action(self):
         filename = 'to_gate.txt'
@@ -164,12 +186,12 @@ class Role(object):
         time.sleep(t)
         self.k.release_key(self.k.right_key)
     
-    def change_role(self, i):
-        if i == 0:
-            i = 1
+    def change_role(self):
+        if self.index == 0:
+            self.index = 1
             key = self.k.down_key
         else:
-            i = 0 
+            self.index = 0 
             key = self.k.up_key
         self.k.tap_key(self.k.enter_key)
         time.sleep(0.1)
@@ -182,4 +204,7 @@ class Role(object):
         time.sleep(0.1)
         self.k.tap_key(self.k.enter_key)
         time.sleep(10)
-        return i
+    
+    def ready_check(self):
+        self._left_click('ReadyCheckFrameYesButton')
+
