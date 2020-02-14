@@ -188,7 +188,7 @@ if __name__=='__main__':
     #3: solo
     #4: jump
     #5: ws
-    role = 4
+    role = 1
 
     if role == 1:
         eye = Eye()
