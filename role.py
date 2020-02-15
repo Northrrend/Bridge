@@ -51,8 +51,6 @@ class Role(object):
         time.sleep(0.1)
 
     def join_bfqueue(self):
-        #This is used to prevent bad guy to summon you
-        self._left_click('StaticPopup1Button2')
         self.k.tap_key(self.TargetKey)
         time.sleep(0.3)
         self.k.tap_key(self.NPCKey)
@@ -75,6 +73,7 @@ class Role(object):
 
     def leave_bfqueue(self):
         self._right_click('MiniMapBattlefieldFrame')
+        time.sleep(0.3)
         self._left_click('DropDownList1Button3')
 
     def enter_bf(self):
@@ -103,7 +102,6 @@ class Role(object):
         self.k.tap_key(self.MountKey1)
         self.k.release_key(self.k.alt_key)
         time.sleep(4)
-        return 4
     
     def jump(self, t):
         c = 0
@@ -122,6 +120,7 @@ class Role(object):
     
     def all_a(self):
         self._left_click('RaidFrameAllAssistCheckButton')
+        time.sleep(1)
     
     def to_bridge(self):
         self.march(2)
@@ -145,6 +144,22 @@ class Role(object):
         self.k.tap_key(self.NPCKey)
         time.sleep(0.3)
         self._left_click('GossipTitleButton1')
+        time.sleep(0.3)
+        self._left_click('QuestFrameCompleteButton')
+        time.sleep(0.3)
+        self._left_click('QuestFrameCompleteQuestButton')
+        time.sleep(0.3)
+        self._left_click('GossipFrameGreetingGoodbyeButton')
+        time.sleep(0.3)
+        self._left_click('GossipFrameGreetingGoodbyeButton')
+        time.sleep(0.1)
+    
+    def donate_ws(self):
+        self.k.tap_key(self.TargetKey2)
+        time.sleep(0.3)
+        self.k.tap_key(self.NPCKey)
+        time.sleep(0.3)
+        self._left_click('GossipTitleButton2')
         time.sleep(0.3)
         self._left_click('QuestFrameCompleteButton')
         time.sleep(0.3)

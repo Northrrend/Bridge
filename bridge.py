@@ -15,12 +15,16 @@ BF_PrepareTime = 110
 BF_WinningTime = 60*40
 Reload_WaitingTime = 7
 Escape_WaitingTime = 60*15
-code_list = ["MMO","OLD","BTO","MPO","TKB"]
+code_list = ["MMO","OLD","BTO","MPO","TKB", "MPP"]
 #MMO ... new BF
 #OLD ... old BF
 #BTO ... BF pop up
 #MPO ... slave ready
 #TKB ... BF end
+
+def _log(s):
+    dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
+    print dt_ms + s
 
 def classic():
     while True:
@@ -29,18 +33,14 @@ def classic():
         while code <> 'BTO':
             time.sleep(15)
             code = eye.dashboard(code_list)
-
-        dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-        print dt_ms + 'new battlefield enter now'
+        _log('new battlefield enter now')
         warrior.enter_bf()
         time.sleep(Reload_WaitingTime)
         warrior.all_a()
         warrior.jump(BF_PrepareTime)
-        dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-        print dt_ms + 'march to bridges'
+        _log('march to bridges')
         t = warrior.to_bridge()
-        dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-        print dt_ms + 'start defence'
+        _log('start defence')
         while t < BF_WinningTime :
             print 'Defence end in ' + str(BF_WinningTime - t) + ' s...'
             warrior.anti_afk()
@@ -48,11 +48,8 @@ def classic():
             time.sleep(r)
             code = eye.dashboard(code_list)
             if code == "TKB":
-                dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-                print dt_ms + 'battle end'
+                _log('battle end')
                 warrior.quit_bf()
-                time.sleep(Reload_WaitingTime)
-                #for virtual machine
                 time.sleep(Reload_WaitingTime)
                 warrior.donate()
                 break
@@ -60,6 +57,7 @@ def classic():
                 t = BF_WinningTime
             t = t + r
         if t >= BF_WinningTime :
+            _log('Timeout')
             warrior.quit_bf_afk()
             time.sleep(Escape_WaitingTime)
 
@@ -71,22 +69,19 @@ def master():
             code = eye.dashboard(code_list)
         warrior.join_bfqueue_group()
         while code <> 'BTO':
-            time.sleep(5)
+            time.sleep(15)
             code = eye.dashboard(code_list)
         time.sleep(20)
         code = eye.dashboard(code_list)
         if code == 'MMO':
-            dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-            print dt_ms + 'new battlefield enter now'
+            _log('new battlefield enter now')
             warrior.enter_bf()
             time.sleep(Reload_WaitingTime)
             warrior.all_a()
             warrior.jump(BF_PrepareTime)
-            dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-            print dt_ms + 'march to bridges'
+            _log('march to bridges')
             t = warrior.to_bridge()
-            dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-            print dt_ms + 'start defence'
+            _log('start defence')
             while t < BF_WinningTime :
                 print 'Defence end in ' + str(BF_WinningTime - t) + ' s...'
                 warrior.anti_afk()
@@ -94,21 +89,18 @@ def master():
                 time.sleep(r)
                 code = eye.dashboard(code_list)
                 if code == "TKB":
-                    dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-                    print dt_ms + 'battle end'
+                    _log('battle end')
                     warrior.quit_bf()
-                    time.sleep(Reload_WaitingTime)
-                    #for virtual machine
                     time.sleep(Reload_WaitingTime)
                     warrior.donate()
                     break
                 t = t + r
             if t >= BF_WinningTime :
+                _log('timeout')
                 warrior.quit_bf_afk()
                 time.sleep(Escape_WaitingTime)
         else:
-            dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-            print dt_ms + 'old battlefield leave'
+            _log('old battlefield leave')
             warrior.leave_bfqueue()
             time.sleep(0.3)
 
@@ -193,43 +185,24 @@ if __name__=='__main__':
     #4: jump
     #5: ws
     role = 4
+    warrior = Role()
+    warrior.gtalk()
+    time.sleep(1)
 
     if role == 1:
         eye = Eye()
         #account.login()
-        warrior = Role()
-        warrior.gtalk()
-        dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-        print dt_ms + 'Wait 1 seconds to start script'
-        time.sleep(1)
         master()
     if role == 2:
         eye = Eye()
-        #account.login()
-        warrior = Role()
-        warrior.gtalk()
-        dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-        print dt_ms + 'Wait 1 seconds to start script'
-        time.sleep(1)
         slave()
     if role == 3:
         eye = Eye()
         #account.login()
-        warrior = Role()
-        warrior.gtalk()
-        dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-        print dt_ms + 'Wait 1 seconds to start script'
-        time.sleep(1)
         classic()
     if role == 4:
-        warrior = Role()
         while True:
             warrior.anti_afk()
             time.sleep(30)
     if role == 5:
-        warrior = Role()
-        warrior.gtalk()
-        dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
-        print dt_ms + 'Wait 1 seconds to start script'
-        time.sleep(1)
         ws()
