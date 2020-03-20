@@ -36,10 +36,15 @@ def classic():
         _log('new battlefield enter now')
         warrior.enter_bf()
         time.sleep(Reload_WaitingTime)
+        time.sleep(Reload_WaitingTime)
+        code = eye.dashboard(code_list)
+        t = 0
+        if code == "OLD":
+            t = BF_WinningTime
         warrior.all_a()
         warrior.jump(BF_PrepareTime)
         _log('march to bridges')
-        t = warrior.to_bridge()
+        warrior.to_bridge()
         _log('start defence')
         while t < BF_WinningTime :
             print 'Defence end in ' + str(BF_WinningTime - t) + ' s...'
@@ -157,6 +162,7 @@ def ws():
         while code <> 'BTO':
             time.sleep(5)
             warrior.ready_check()
+            warrior.anti_afk()
             code = eye.dashboard(code_list)
         dt_ms = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f ')
         print dt_ms + 'new battlefield enter now'
@@ -175,7 +181,9 @@ def ws():
         warrior.quit_bf()
         time.sleep(Reload_WaitingTime)
         #warrior.march(5)
-        #warrior.donate()
+        warrior.turn_left(0.15)
+        warrior.march(2.8)
+        warrior.donate_ws()
 
 if __name__=='__main__':
 
@@ -203,6 +211,8 @@ if __name__=='__main__':
     if role == 4:
         while True:
             warrior.anti_afk()
-            time.sleep(30)
+            print 'sent'
+            time.sleep(120)
     if role == 5:
+        eye = Eye()
         ws()

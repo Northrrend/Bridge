@@ -288,7 +288,7 @@ statusFrame:UpdateVisibility()
         SendChatMessage("MMO", "party")
         code = "MMO"
     end
-    if bftime >= 180000 then
+    if bftime >= 300000 then
         SendChatMessage("OLD", "party")
         code = "OLD"
     end

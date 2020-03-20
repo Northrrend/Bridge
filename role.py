@@ -196,12 +196,6 @@ class Role(object):
     
     def ready(self):
         self.ptalk('MPO')
-    
-    def report_new(self):
-        self.ptalk('MPO')
-
-    def report_old(self):
-        self.ptalk('OLD')
 
     def test_action(self):
         filename = 'to_gate.txt'
@@ -217,6 +211,11 @@ class Role(object):
         self.k.press_key(self.k.right_key)
         time.sleep(t)
         self.k.release_key(self.k.right_key)
+    
+    def turn_left(self, t):
+        self.k.press_key(self.k.left_key)
+        time.sleep(t)
+        self.k.release_key(self.k.left_key)
     
     def change_role(self):
         if self.index == 0:

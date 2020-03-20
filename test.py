@@ -22,8 +22,9 @@ from capture import *
 
 time.sleep(2)
 warrior = Role()
-warrior.change_role()
-warrior.change_role()
+warrior.turn_left(0.15)
+warrior.march(2.8)
+warrior.donate_ws()
 
 
 

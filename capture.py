@@ -9,10 +9,10 @@ class Eye(object):
 
     def __init__(self):   
         self.VIRTUAL = 1
-        self.SCREEN_SCALE = 1.25
-        self.SCREEN_W = 1920
-        self.SCREEN_H = 1080
-        self.GAME_SCALE = 0.8
+        self.SCREEN_SCALE = 2.0
+        self.SCREEN_W = 3840
+        self.SCREEN_H = 2160
+        self.GAME_SCALE = 0.9
         self.GAME_W = self.SCREEN_W*self.GAME_SCALE
         self.GAME_H = self.SCREEN_H*self.GAME_SCALE
         p = os.popen('Systeminfo | findstr /i "System Model"')
@@ -56,10 +56,10 @@ class Eye(object):
             x2 = 200
             y2 = 30
         if self.VIRTUAL == 0 :
-            x1 = -9
-            y1 = -40
-            x2 = 200/self.SCREEN_SCALE
-            y2 = 30/self.SCREEN_SCALE - y1
+            x1 = -9/self.SCREEN_SCALE
+            y1 = -150/self.SCREEN_SCALE
+            x2 = 400
+            y2 = 90/self.SCREEN_SCALE - y1
         w = x1 + x2
         h = y1 + y2
         saveBitMap.CreateCompatibleBitmap(mfcDC, int(w), int(h))
