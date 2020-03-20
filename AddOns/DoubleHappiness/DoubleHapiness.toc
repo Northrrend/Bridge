@@ -1,0 +1,7 @@
+## Interface: 81500
+## Version: 0.1
+## Title: Double Happiness
+## Author: xjq314
+## Notes: Give you a lot of happiness
+
+Core.lua
